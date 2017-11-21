@@ -1,0 +1,117 @@
+% Created 2016-02-08 月 21:44
+\documentclass[a4j,12pt,oneside,openany,english]{jsbook}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{book2report}
+\usepackage{thesis}
+
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\usepackage{array}
+\usepackage{color}
+
+\usepackage{lscape}
+
+\usepackage{nidanfloat}
+\usepackage{setspace}
+
+% \newcommand{\comment}[1]{\colorbox{green}{#1}}
+\newcommand{\comment}[1]{}    
+
+
+\setcounter{topnumber}{5}%    ページ上部の図表は 5 個まで
+\def\topfraction{1.00}%       ページの上 1.00 まで図表で占めて可
+\setcounter{bottomnumber}{5}% ページ下部の図表は 5 個まで
+\def\bottomfraction{1.00}%    ページの下 1.00 まで図表で占めて可
+\setcounter{totalnumber}{10}% ページあたりの図表は 10 個まで
+\def\textfraction{0.00}%      ページうち本文が占める割合の下限
+  
+
+\date{\today}
+\begin{document}
+
+% 英語で，見出しのフォントが気に入らなかったら
+\renewcommand{\headfont}{\bfseries}
+
+% ページ数が少ないときはここを大きくしてごまかそう！！効果絶大！！
+\renewcommand{\baselinestretch}{1.1}
+
+%%%%%%%%%%%% 題目 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% ここも適当に変えてもいいと思う %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{empty}
+\begin{center}
+  \vspace*{5mm}
+  {\Huge {\bf Master's Thesis}}\\
+  \vspace{2cm}
+  \vspace{1cm}
+  \underline{\LARGE{Scalable Parallel Computing}} \\
+  \vspace{0.2cm}  
+  \underline{\LARGE{on NoC-based Embedded Many-Core Platform}} \\  
+  \vspace{0.5cm}
+  \vspace{12mm}
+  {\large Supervisor}\\
+  \vspace{6mm}
+  \underline{\Large Professor Toshimitsu Ushio}\\
+  　\\
+  \underline{\Large Assistant Professor Takuya Azumi}\\
+  \vspace{8mm}
+  {\large By}\\
+  \vspace{6mm}
+  \underline{\Large Yuya Maruyama}\\
+  \vspace{10mm}
+  {\Large February xx, 2018}\\  
+  \vspace{14mm}
+  {\Large Division of Mathmatical Science for Social System,\\
+    Department of Systems Innovation,\\
+    Graduate School of Engineering Science, Osaka University}\\
+\end{center}
+\clearpage
+\setcounter{page}{0}
+\pagenumbering{roman}
+
+%%%%%%%%%%%% 概要 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+  This paper presents evaluations of parallel computing on embedded many-core platforms.
+  In embedded systems, high processing requirements and low power consumption require heterogeneous computing platforms including many-core platforms.
+  Considering nonuniform memory access (NUMA) for scalability, many-core applications must be designed based on scalable data allocation and scalable parallel computing.
+  As a reference embedded many-core computing platform, we use the Massively Parallel Processor Arrays 256 (MPPA-256) developed by Kalray, one of the commercial off-the-shelf (COTS) multi-/many-core platforms.
+  In this paper, we conduct evaluations of data transfer on network-on-chip (NoC) implementations, microbenchmarks, and parallelization of a practical application on NoC-based embedded many-core platforms.
+  We investigate currently achievable data transfer latencies between distributed memories on NoC systems, memory access characteristics with NUMA, and parallelization scalability of many cores.
+  As a practical application, we parallelize a portion of the self-driving algorithms on many-core processors.
+  We believe that this performance level is acceptable for the real-world production of autonomous vehicles.
+  By highlighting many-core computing capabilities, we explore scalable parallel computing on NoC-based embedded many-core platforms.
+\end{abstract}
+
+%%%%%%%%%%%% 目次 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\tableofcontents
+\clearpage
+\setcounter{page}{0}
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%% ここから内容 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{thesis_master_body}
+
+%%%%%%%%%%%% Publication List %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Publication List}
+
+% \section*{International Conference Proceedings}
+% \renewcommand{\labelenumi}{[\arabic{enumi}]}
+% \begin{enumerate}
+% \item Y.Maruyama, S.Kato, and T.Azumi,
+%   ``{Impact of DDS on ROS2},''
+%   \emph{In Proceedings of the 19th IEEE International Symposium on Real-Time Computing (ISORC2016)}, 2016.
+%   (submitted)
+% \item Y.Maruyama, S.Kato, and T.Azumi,
+%   ``{Preliminary Evaluation of ROS2},''
+%   \emph{WiP session of the ACM/IEEE 7th International Conference on Cyber-Physical Systems (ICCPS2016)}, 2016.
+%   (accepted)
+% \end{enumerate}
+% \addcontentsline{toc}{chapter}{Published List}
+
+\end{document}
+
