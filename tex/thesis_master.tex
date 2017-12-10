@@ -96,8 +96,40 @@
 
 \input{thesis_master_body}
 
+%%%%%%%%%%%% Apendix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Apendix A: Robot Operating System (ROS)}
+\addcontentsline{toc}{chapter}{Apendix A: Robot Operating System (ROS)}
+\setcounter{chapter}{1}
+\label{sec:ros}
+
+\input{thesis_master_apendixA}
+
+\chapter*{Apendix B: Autoware}
+\addcontentsline{toc}{chapter}{Apendix B: Autoware}
+\setcounter{chapter}{1}
+\label{sec:autoware}
+
+\input{thesis_master_apendixB}
+
+
+%%%%%%%%%%%% Acknowledgement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{acknowledgement}
+  This paper was partly supported by Toyota Motor Company, eSOL, and Kalray.
+  In addition, this research was partially supported by JST, PRESTO.
+\end{acknowledgement}
+
+
+%%%%%%%%%%%% References %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{IEEEtran}
+\bibliography{./reference.bib}
+
+
 %%%%%%%%%%%% Publication List %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter*{Publication List}
+\addcontentsline{toc}{chapter}{Publication List}
 
 % \section*{International Conference Proceedings}
 % \renewcommand{\labelenumi}{[\arabic{enumi}]}
@@ -111,7 +143,6 @@
 %   \emph{WiP session of the ACM/IEEE 7th International Conference on Cyber-Physical Systems (ICCPS2016)}, 2016.
 %   (accepted)
 % \end{enumerate}
-% \addcontentsline{toc}{chapter}{Published List}
 
 \end{document}
 
