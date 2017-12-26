@@ -16,7 +16,7 @@ For example, self-driving systems involve various applications and are sometimes
 Considering the requirements of high processing, predictability, and energy efficiency for self-driving systems, such systems require a heterogeneous computing system such as multi-/many-core platforms and graphical processing units (GPU).
 (This is discussed in Section \ref{sec:related_work}.)
 \comment{1-3} In embedded systems, multi-/many-core architectures are an important trend as the architecture integrates cores to realize high-performance and general-purpose computing with low power consumption \cite{becker2016contention}, \cite{perret2016mapping}.
-Extant studies have examined several applications of multi/many-core platforms \cite{becker2016contention}, \cite{saidi2015shift}, \cite{perret2016temporal}, \cite{perret2016mapping}, \cite{becker2014mapping} \cite{BURGIO2017299}.
+Extant studies have examined several applications of multi/many-core platforms \cite{becker2016contention}, \cite{saidi2015shift}, \cite{perret2016temporal}, \cite{perret2016mapping}, \cite{becker2014mapping}, \cite{BURGIO2017299}.
 % Recently, the computational ability of single core processors has reached its limit \comment{1-3} and thus the applicability of Moore's law \cite{moore2006cramming} is unclear.
 % Multi/many core architecture is an important trend in \comment{1-3} recent years as it integrates cores to realize high-performance and general-purpose computing with low power consumption.
 % Hence, high energy efficiency is a superior feature of multi/many core platforms.
@@ -103,42 +103,11 @@ Section \ref{sec:conclusion} presents the conclusions and directions for future 
 \chapter{System Model}
 \label{sec:system_model}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=1.0\linewidth]{../figure/mppa_architecture_brief.eps}
-  \caption{\label{fig:mppa_architecture}
-    An overview of the architecture of the Kalray MPPA-256 Bostan.}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=1.0\linewidth]{../figure/mppa_architecture_brief.eps}
-  \caption{\label{fig:mppa_architecture}
-    An overview of the architecture of the Kalray MPPA-256 Bostan.}
-\end{figure}
 
 This section presents the system model used throughout the work.
 The many-core model of Kalray MPPA-256 Bostan is considered.
 First, a hardware model is introduced in Section \ref{sec:hardware_model}, followed by a software model in Section \ref{sec:software_model}.
 
-% \begin{figure}[htbp]
-%   \tabcolsep = 0.5mm              % side-margin in column
-%   \begin{tabular}{cc}
-%     \begin{minipage}[htbp]{0.49\textwidth}
-%       \centering
-%       \includegraphics[width=1.0\linewidth]{../figure/mppa_architecture_brief.eps}
-%       \caption{\label{fig:mppa_architecture}
-%         An overview of the architecture of the Kalray MPPA-256 Bostan.}
-%     \end{minipage}   
-%     &
-%     % \setcounter{figure}{11}
-%     \begin{minipage}[htbp]{0.49\textwidth}
-%       \includegraphics[width=1.0\linewidth]{../figure/mppa_architecture_brief.eps}
-%       \caption{\label{fig:mppa_architecture}
-%         An overview of the architecture of the Kalray MPPA-256 Bostan.}
-%     \end{minipage}
-%   \end{tabular}
-% \end{figure} 
 
 
 \section{Hardware Model}
@@ -171,12 +140,12 @@ Each IOS consists of quad IO cores and a NoC interface.
   The UC can extract data from memory by using a programmed pattern and send the data on the NoC.
   After the UC is initiated, this continues in an autonomous fashion without using a processing element (PE) and an IO core.
 \end{itemize}
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=1.0\linewidth]{../figure/mppa_architecture.eps}
-%       \caption{\label{fig:mppa_architecture}
-%     An overview of the architecture of the Kalray MPPA-256 Bostan.}
-%   \end{figure}
+\begin{figure*}[!htbp]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../figure/mppa_architecture.eps}
+      \caption{\label{fig:mppa_architecture}
+    An overview of the architecture of the Kalray MPPA-256 Bostan.}
+  \end{figure*}
 
 \section{Compute Clusters (CCs)}
 \label{sec:cc}
@@ -202,22 +171,22 @@ Fig. \ref{fig:cc_architecture} illustrates the architecture of each CC.
   The CC DMA engine also has the following three interfaces: an Rx, a Tx, and a UC. 
   The CC DMA engine is instantiated in every cluster and connected to the SMEM.
 \end{itemize}
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=1.0\linewidth]{../figure/cc_architecture.eps}
-%   \caption{\label{fig:cc_architecture}
-%     Compute Cluster architecture.}
-% \end{figure}
+\begin{figure*}[!htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{../figure/cc_architecture.eps}
+  \caption{\label{fig:cc_architecture}
+    Compute Cluster architecture.}
+\end{figure*}
 
 \section{Network-on-Chip (NoC)}
 \label{sec:noc}
 
-\begin{figure}[htbp]
+\begin{figure*}[!htbp]
   \centering
-  \includegraphics[width=0.9\linewidth]{../figure/noc_map.eps}
+  \includegraphics[width=0.7\linewidth]{../figure/noc_map.eps}
       \caption{\label{fig:noc_map}
     NoC connections (both D-NoC and C-NoC).}
-\end{figure}
+\end{figure*}
 
 The 16 CCs and the four IOSs are connected by NoC as shown in Fig. \ref{fig:noc_map}.
 Furthermore, NoC is constructed \comment{1-12} as the bus network and has routers on each node.
@@ -249,12 +218,12 @@ Furthermore, NoC is constructed \comment{1-12} as the bus network and has router
 \section{Software Model}
 \label{sec:software_model}
 
-\begin{figure}[htbp]
+\begin{figure*}[!htbp]
   \centering
-  \includegraphics[width=0.8\linewidth]{../figure/softwarestack.eps}   
+  \includegraphics[width=0.7\linewidth]{../figure/softwarestack.eps}   
   \caption{\label{fig:software_stack}
     The software stack of Kalray MPPA-256.}     
-\end{figure}
+\end{figure*}
 
 The software stack used for Kalray MPPA-256 is composed of a hardware abstraction layer, a low-level layer, an OS, and a user application.  
 Fig. \ref{fig:software_stack} shows the software stack used for Kalray MPPA-256 in the present work.
@@ -327,9 +296,9 @@ The following evaluations are all conducted on real hardware boards with eMCOS.
 \subsection{Situations and Assumptions}
 \label{sec:situations_and_assumptions}
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\linewidth]{../figure/noc_routes_old.eps}
+  \includegraphics[width=0.5\linewidth]{../figure/noc_routes_old.eps}
       \caption{\label{fig:noc_routes}
     Four D-NoC routes used in the evaluation.}
 \end{figure}
@@ -347,100 +316,7 @@ Given this assumption, the other memory area corresponds to the application, lib
 End-to-end latencies are measured 1,000 times in numerous situations as shown in Figs. \ref{fig:DDR_tx}, \ref{fig:DDR_uc}, and \ref{fig:IO_SMEM_tx}, and boxplots are obtained, as depicted in Figs. \ref{fig:IO_SMEM_uc}, \ref{fig:tx_uc_log}, and \ref{fig:tx_uc}.
 In the evaluation setting, we minimize traffic conflicts to focus on the relation between end-to-end latency and routing on NoC.
 
-% \begin{figure}[htbp]
-%   \tabcolsep = 0.5mm              % side-margin in column
-%   \begin{tabular}{cccc}
-%     \begin{minipage}[htbp]{0.24\textwidth}
-%       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_DDR_tx.eps}
-%               \caption{Data transfer with Tx from IO DDR to CC.}
-%       \label{fig:DDR_tx}
-%     \end{minipage}
-%     &
-%     % \setcounter{figure}{8}
-%     \begin{minipage}[htbp]{0.24\textwidth}
-%       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_DDR_uc.eps}
-%               \caption{Data transfer with UC from IO DDR to CC.}
-%       \label{fig:DDR_uc}
-%     \end{minipage}
-%     &
-%     % \setcounter{figure}{10}
-%     \begin{minipage}[htbp]{0.24\textwidth}
-%       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_IO_SMEM_tx.eps}
-%               \caption{Data transfer with Tx from IO SMEM to CC.}
-%       \label{fig:IO_SMEM_tx}
-%     \end{minipage}
-%     &
-%     % \setcounter{figure}{7}
-%     \begin{minipage}[htbp]{0.24\textwidth}
-%       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_IO_SMEM_uc.eps}
-%               \caption{Data transfer with UC from IO SMEM to CC.}
-%       \label{fig:IO_SMEM_uc}
-%     \end{minipage}
-%   \end{tabular}
-% \end{figure}
 
-\begin{figure}[htbp]
-  \tabcolsep = 0.5mm              % side-margin in column
-  \begin{tabular}{cc}
-    % \setcounter{figure}{9}
-    \begin{minipage}[htbp]{0.49\textwidth}
-      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_DDR_tx.eps}
-      \caption{Data transfer with Tx from IO DDR to CC.}
-      \label{fig:DDR_tx}
-    \end{minipage}
-    &
-    % \setcounter{figure}{11}
-    \begin{minipage}[htbp]{0.49\textwidth}
-      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_DDR_uc.eps}
-      \caption{Data transfer with UC from IO DDR to CC.}
-      \label{fig:DDR_uc}
-    \end{minipage}
-  \end{tabular}
-\end{figure}
-
-\begin{figure}[htbp]
-  \tabcolsep = 0.5mm              % side-margin in column
-  \begin{tabular}{cc}
-    % \setcounter{figure}{9}
-    \begin{minipage}[htbp]{0.49\textwidth}
-      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_IO_SMEM_uc.eps}
-      \caption{Data transfer with UC from IO SMEM to CC.}
-      \label{fig:IO_SMEM_uc}
-    \end{minipage}
-    &
-    % \setcounter{figure}{11}
-    \begin{minipage}[htbp]{0.49\textwidth}
-      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_IO_SMEM_uc.eps}
-      \caption{Data transfer with UC from IO SMEM to CC.}
-      \label{fig:IO_SMEM_uc}
-    \end{minipage}
-  \end{tabular}
-\end{figure}
-
-\begin{figure}[htbp]
-  \tabcolsep = 0.5mm              % side-margin in column
-  \begin{tabular}{cc}
-    % \setcounter{figure}{9}
-    \begin{minipage}[htbp]{0.49\textwidth}
-      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_Tx_vs_UC_log.eps}
-      \caption{Data transfer with Tx/UC (logarithmic axis).}
-      \label{fig:tx_uc_log}
-    \end{minipage}
-    &
-    % \setcounter{figure}{11}
-    \begin{minipage}[htbp]{0.49\textwidth}
-      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_Tx_vs_UC.eps}
-      \caption{Data transfer with Tx/UC (linear axis).}
-      \label{fig:tx_uc}
-    \end{minipage}
-  \end{tabular}
-\end{figure}
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=0.9\linewidth]{../../R/mppa/graph/eps/BoxPlot_Tx_vs_UC_log.eps}
-%       \caption{\label{fig:tx_uc_log}
-%     Data transfer with Tx/UC. }
-%     \end{figure}
 
 % \subsection{Data Transfer Framework}
 % \label{sec:framework}
@@ -499,11 +375,80 @@ A UC in the NoC interface executes a programmed thread sending data.
 This evaluation result suggests that the slow access speed of the DDR is not significant in the case of the UC.
 In a manner similar to that of the Tx interface, the speed of the data transfer latency between CCs exceeds that between an IOS and a CC.
 
+\clearpage
+
+\begin{figure*}[!htbp]
+  \tabcolsep = 0.5mm              % side-margin in column
+  \begin{tabular}{cc}
+    % \setcounter{figure*}{9}
+    \begin{minipage}[!htbp]{0.49\textwidth}
+      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_DDR_tx.eps}
+      \caption{Data transfer with Tx from IO DDR to CC.}
+      \label{fig:DDR_tx}
+    \end{minipage}
+    &
+    % \setcounter{figure*}{11}
+    \begin{minipage}[!htbp]{0.49\textwidth}
+      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_DDR_uc.eps}
+      \caption{Data transfer with UC from IO DDR to CC.}
+      \label{fig:DDR_uc}
+    \end{minipage}
+  \end{tabular}
+\end{figure*}
+
+\begin{figure*}[!htbp]
+  \tabcolsep = 0.5mm              % side-margin in column
+  \begin{tabular}{cc}
+    % \setcounter{figure*}{9}
+    \begin{minipage}[!htbp]{0.49\textwidth}
+      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_IO_SMEM_uc.eps}
+      \caption{Data transfer with UC from IO SMEM to CC.}
+      \label{fig:IO_SMEM_tx}
+    \end{minipage}
+    &
+    % \setcounter{figure*}{11}
+    \begin{minipage}[!htbp]{0.49\textwidth}
+      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_IO_SMEM_uc.eps}
+      \caption{Data transfer with UC from IO SMEM to CC.}
+      \label{fig:IO_SMEM_uc}
+    \end{minipage}
+  \end{tabular}
+\end{figure*}
+
+\begin{figure*}[!htbp]
+  \tabcolsep = 0.5mm              % side-margin in column
+  \begin{tabular}{cc}
+    % \setcounter{figure*}{9}
+    \begin{minipage}[!htbp]{0.49\textwidth}
+      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_Tx_vs_UC_log.eps}
+      \caption{Data transfer with Tx/UC (logarithmic axis).}
+      \label{fig:tx_uc_log}
+    \end{minipage}
+    &
+    % \setcounter{figure*}{11}
+    \begin{minipage}[!htbp]{0.49\textwidth}
+      \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_Tx_vs_UC.eps}
+      \caption{Data transfer with Tx/UC (linear axis).}
+      \label{fig:tx_uc}
+    \end{minipage}
+  \end{tabular}
+\end{figure*}
+
+\clearpage
+
 \section{Matrix Calculation}
 \label{sec:martix_eval}
 
 \subsection{Situations and Assumptions}
 \label{sec:situations_and_assumptions}
+
+\begin{figure*}[!htbp]
+  \centering
+  \includegraphics[width=0.5\linewidth]{../figure/matrix_calculation.eps}
+  \caption{\label{fig:mat_calc}
+    Matrix calculation situations.}
+\end{figure*}
+
 In the evaluation, the matrix calculation time and parallelization potential of MPPA-256 are clarified.
 Matrix calculations are conducted in an IOS and CCs.
 Three computing situations are considered as shown in Fig. \ref{fig:mat_calc}.
@@ -528,13 +473,6 @@ Matrix A and Matrix B are multiplied, and the result is stored in Matrix C.
 The total for the three matrices is set as approximately 1 MB.
 We assume that the remainder of the SMEM (1 MB) is occupied with system software and applications in the CC.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.8\linewidth]{../figure/matrix_calculation.eps}
-  \caption{\label{fig:mat_calc}
-    Matrix calculation situations.}
-\end{figure}
-
 \subsection{Influences of Cache and Memory Type}
 \label{sec:cache_and_memory}
 First, matrix calculation time with the cache in the IOS and CC is depicted in Fig. \ref{fig:mat_calc_cache}.
@@ -555,37 +493,21 @@ This result is contrary to intuition, and a cache line problem is conceivable.
 When a small data cache (8 KB) in a PE of the CC does not function adequately and an application always misses the cache, memory access will pay the time for a noncached data access and the cost to refill the cache line.
 As a result, the memory access speed without the cache exceeds that with it.
 
-% \begin{figure}[htbp]
-%   \tabcolsep = 0.5mm              % side-margin in column
-%   \begin{tabular}{cc}
-%     \begin{minipage}[htbp]{0.49\textwidth}
-%     \includegraphics[width=1.0\linewidth]{../figure/BarGraph_matrix_with_cache.eps}
-%       \caption{Matrix calculations in IOS and CC with cache.}
-%       \label{fig:mat_calc_cache}
-%     \end{minipage}   
-%     &
-%     % \setcounter{figure}{11}
-%     \begin{minipage}[htbp]{0.49\textwidth}
-%       \includegraphics[width=1.0\linewidth]{../figure/BarGraph_matrix_without_cache.eps}
-%       \caption{Matrix calculations in IOS and CC without cache.}
-%       \label{fig:mat_calc_uncache}
-%     \end{minipage}
-%   \end{tabular}
-% \end{figure}
+\clearpage
 
-\begin{figure}[htbp]
+\begin{figure*}[!htbp]
   \centering
-  \includegraphics[width=1.0\linewidth]{../figure/BarGraph_matrix_with_cache.eps}
+  \includegraphics[width=.9\linewidth]{../figure/BarGraph_matrix_with_cache.eps}
   \caption{Matrix calculations in IOS and CC with cache.}
   \label{fig:mat_calc_cache}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure*}[!htbp]
   \centering
-  \includegraphics[width=1.0\linewidth]{../figure/BarGraph_matrix_without_cache.eps}
+  \includegraphics[width=.9\linewidth]{../figure/BarGraph_matrix_without_cache.eps}
   \caption{Matrix calculations in IOS and CC without cache.}
   \label{fig:mat_calc_uncache}
-\end{figure}
+\end{figure*}
 
 \subsection{Four CCs' Parallelization}
 \label{sec:four_CCs}
@@ -615,23 +537,23 @@ Currently, to avoid this error, Matrix C must be allocated in the IO SMEM.
 Note that the above evaluation results when Matrix C is allocated in the DDR.
 
 
-\begin{figure}[htbp]
+\begin{figure*}[!htbp]
   \tabcolsep = 0.5mm              % side-margin in column
   \begin{tabular}{cc}
-    \begin{minipage}[htbp]{0.49\textwidth}
+    \begin{minipage}[!htbp]{0.49\textwidth}
       \includegraphics[width=0.9\linewidth]{../figure/BarGraph_matrix_with_CCs_314.eps}
       \caption{Matrix calculations with offload computing (314 KB matrix x 3).}
       \label{fig:mat_calc_offload_314}
     \end{minipage}   
     &
-    % \setcounter{figure}{11}
-    \begin{minipage}[htbp]{0.49\textwidth}
+    % \setcounter{figure*}{11}
+    \begin{minipage}[!htbp]{0.49\textwidth}
       \includegraphics[width=0.9\linewidth]{../figure/BarGraph_matrix_with_CCs_640.eps}
       \caption{Matrix calculations with offload computing (640 KB matrix x 3).}
       \label{fig:mat_calc_offload_640}
     \end{minipage}
   \end{tabular}
-\end{figure}
+\end{figure*}
 
 \section{Practical Application}
 \label{sec:practical_application}
@@ -659,31 +581,25 @@ This parallelized algorithm was executed on simulated and real car experiments i
 The steering, accelerator, and brake are automatically controlled based on the results of MPPA-256.
 A demonstration video of the adaptation of the parallelized self-localization algorithm to Autoware on eMCOS can be seen at: https://youtu.be/wZyqF90c5b8  
 
-\begin{figure}[htbp]
+\begin{figure*}[!htbp]
   \tabcolsep = 0.5mm              % side-margin in column
   \begin{tabular}{cc}
-    \begin{minipage}[htbp]{0.49\textwidth}
+    \begin{minipage}[!htbp]{0.49\textwidth}
       \centering
       \includegraphics[width=1.0\linewidth]{../figure/ndt_matching.eps}
       \caption{\label{fig:ndt_matching_situation}
       A situation of vehicle self-localization execution.}
     \end{minipage}   
     &
-    % \setcounter{figure}{11}
-    \begin{minipage}[htbp]{0.49\textwidth}
+    % \setcounter{figure*}{11}
+    \begin{minipage}[!htbp]{0.49\textwidth}
       \includegraphics[width=1.0\linewidth]{../figure/BarGraph_ndt_matching.eps}
       \caption{\label{fig:ndt_matching}
       Vehicle self-localization of the partially parallelized self-driving application.}
     \end{minipage}
   \end{tabular}
-\end{figure}
+\end{figure*}
 
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=0.8\linewidth]{../figure/BarGraph_ndt_matching.eps}
-%       \caption{\label{fig:ndt_matching}
-%   Vehicle self-localization of the partially parallelized self-driving application.}
-%     \end{figure}
 
 \section{Lessons Learned}
 \label{sec:lessons}
@@ -790,7 +706,7 @@ Although the analysis examined the memory access characteristics of the external
 
 \begin{landscape}
   % \renewcommand{\arraystretch}{1.2}
-  \begin{table*}[t]
+  \begin{table*}[!htbp]
     \caption{\label{tb:comparison_platforms}
       Comparison of Many-core Platform to CPU, GPU, and FPGA}
     \centering
@@ -815,7 +731,7 @@ Although the analysis examined the memory access characteristics of the external
   \end{table*}
 
   % \renewcommand{\arraystretch}{1.2}
-  \begin{table*}[t]
+  \begin{table*}[!htbp]
     \caption{\label{tb:comparison_manycore}
       Comparison of Many-core Platforms}
     \centering
@@ -835,7 +751,7 @@ Although the analysis examined the memory access characteristics of the external
     \end{tabular}
   \end{table*}  
   % \renewcommand{\arraystretch}{1.2}
-  \begin{table*}[t]
+  \begin{table*}[!htbp]
     \caption{\label{tb:comparison_relatedwork}
       Comparison of Previous Work}
     \centering

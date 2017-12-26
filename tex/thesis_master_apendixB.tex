@@ -1,6 +1,13 @@
 \section{System Model}
 \label{sec:system_model}
 
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{../figure/system_model.eps}
+  \caption{\label{fig:system_model}
+    Basic control and data flow of autonomous vehicles.}
+\end{figure}
+
 Autonomous vehicles as cyber-physycal systems can be abstracted by
 sensing, computing, and actuation, as shown in Figure
 \ref{fig:system_model}.
@@ -31,20 +38,20 @@ Typical outputs of the computing intelligence are angular and linear
 velocity values, which correspond to the commands for steering and
 stroking, respectively.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.9\linewidth]{../figure/system_model.eps}
-  \caption{\label{fig:system_model}
-    Basic control and data flow of autonomous vehicles.}
-\end{figure}
-
 \section{System Stack}
+
+\begin{figure*}[!htbp]
+  \centering
+  \includegraphics[width=0.6\linewidth]{../figure/system_stack.eps}
+  \caption{\label{fig:system_stack}
+  Complete system stack of autonomous vehicles using Autoware.}
+\end{figure*}
 
 We build the complete system stack of autonomous vehicles on top of
 integrated platforms using open-source software, as shown in
 Figure~\ref{fig:system_stack}.
 The primary target of self-driving technology presented in this paper is
-set for urban areas rather than freeways and highways.
+ set for urban areas rather than freeways and highways.
 We develop Autoware which is a popular
 open-source software project developed for urban-area autonomous
 vehicles.
@@ -94,34 +101,8 @@ work partly ported Autoware to another embedded computing platform,
 called Kalray Massively Parallel Processor Array
 (MPPA)~\cite{yuya2017exploring}. 
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.9\linewidth]{../figure/system_stack.eps}
-  \caption{\label{fig:system_stack}
-  Complete system stack of autonomous vehicles using Autoware.}
-\end{figure}
-
-
 \section{Algorithms}
 \label{sec:system_model}
-
-\begin{figure*}[htbp]
-    \centering
-    \includegraphics[width=1.0\linewidth]{../figure/rviz_autoware.eps}
-    \caption{\label{fig:rviz_autoware}
-    Self-driving software packages in Autoware:
-    (a) RViz visualization with high-definition and high-resolution geographical information,
-    (b) NDT scan matching localization using a 3D map and a 3D LiDAR scan,
-    (c) deep learning based object detection with SSD, 
-    (d) projection of the 3D point-cloud data onto the image, 
-    (e) sensor fusion between the LiDAR sensor and the camera with calibration,
-    (f) obtainment of the traffic light positions from the 3D map,
-    (g) traffic light recognition with the ROI,
-    (h) trajectory generation for parking lots using the hybrid-state A* search,
-    (i) trajectory generation for object avoidance using the hybrid-state A* search,
-    (j) trajectory generation for object avoidance using the lattice-based algorithm,
-    (k) steering angular velocity calculation for path following using the pure pursuit algorithm.}
-\end{figure*}
 
 In this section, we present the detail of Autoware in accordance with
 Figure~\ref{fig:system_model}, with a particular emphasis on the modules
@@ -355,3 +336,23 @@ Localization errors could also cause the gap between the vehicle and outputs of 
 As a result, the vehicle could come across unexpected obstacles.
 To cope with this scenario, our path follower ensures a minimum distance to obstacles, overwriting the given plan.
 Our motion planner also updates the waypoints, considering obstacles on heading lane area.
+
+\clearpage
+
+\begin{figure*}[!htbp]
+  \centering
+  \includegraphics[width=1.0\linewidth]{../figure/rviz_autoware.eps}
+  \caption{\label{fig:rviz_autoware}
+  Self-driving software packages in Autoware:
+  (a) RViz visualization with high-definition and high-resolution geographical information,
+  (b) NDT scan matching localization using a 3D map and a 3D LiDAR scan,
+  (c) deep learning based object detection with SSD, 
+  (d) projection of the 3D point-cloud data onto the image, 
+  (e) sensor fusion between the LiDAR sensor and the camera with calibration,
+  (f) obtainment of the traffic light positions from the 3D map,
+  (g) traffic light recognition with the ROI,
+  (h) trajectory generation for parking lots using the hybrid-state A* search,
+  (i) trajectory generation for object avoidance using the hybrid-state A* search,
+  (j) trajectory generation for object avoidance using the lattice-based algorithm,
+  (k) steering angular velocity calculation for path following using the pure pursuit algorithm.}
+\end{figure*}
