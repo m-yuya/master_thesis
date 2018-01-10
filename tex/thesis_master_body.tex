@@ -80,11 +80,11 @@ We reveal the advantages and disadvantages of embedded many-core computing based
 
 \begin{itemize}
   \setlength{\leftskip}{-5mm}
-  \item The evaluations of the data transfer on DMA-capable NoC components quantitatively characterize the end-to-end latencies, which depend on the routing and DMA configurations.
-  \item The scalability of parallelization in many-core processors based on NoC technology is observed in evaluations of matrix calculations in several situations and a real complex application as a part of a self-driving system.
-  \item The evaluations of parallel processing examine the characteristics of the memory access speed, which varies according to where data are allocated and what accesses the memory.
+  \item On DMA-capable NoC components, the evaluations of the data transfer quantitatively characterize the end-to-end latencies, which depend on the routing and DMA configurations, and the memory access speed, which varies according to where data are allocated and what accesses the memory.
+  \item In many-core processors based on NoC technology, the scalability of parallelization is observed in evaluations of matrix calculations in several situations and a real complex application as a part of a self-driving system.
+  \item Under limited memory, our proposed software framework provides structured communications layer and efficient development on heterogeneous computing platforms including NoC.
 \end{itemize}
-  
+
 To the best of our knowledge, this is the first work that examines data transfer and data allocation matters for many-core computing beyond an intuitive expectation to allow system designers to choose appropriate data transfer methods.
 Additionally, the speed-up result of a self-driving application indicates a practical potential for NoC-based embedded many-core computing.
 \comment{1-8, 1-9}
@@ -236,7 +236,7 @@ In the hardware abstraction layer, an abstraction package abstracts hardware of 
 The hardware abstraction is responsible for partitioning hardware resources and controlling access to the resources from the user-space operating system libraries.
 \comment{1-16} 
 % Additionally, the abstraction package retrieves resources allocated to a partition at any time.
-The abstraction sets-up and controls interpartition communications as a virtual machine abstraction layer.
+The abstraction sets-up and controls inter-partition communications as a virtual machine abstraction layer.
 The hardware abstraction runs on the dedicated RM core.
 All the services are provided commonly by an operating system (e.g., virtual memory and schedule) that must be provided by user-space libraries.
 % Consequently, each runtime or operating system implements its own services that are optimized to specific needs.
@@ -262,7 +262,7 @@ Here, the following real-time operating systems (RTOSs) supporting MPPA are intr
 
 \begin{itemize}
   \setlength{\leftskip}{-5mm}    
-  \item \textbf{RTEMS}: Real-Time Executive for Multiprocessor Systems (RTEMS) is a full featured RTOS prepared for embedded platforms.
+  \item \textbf{RTEMS}: Real-Time Executive for Multiprocessor Systems (RTEMS) is a full-featured RTOS prepared for embedded platforms.
   RTEMS supports several APIs and standards, and most notably supports the POSIX API.
   The system provides a rich set of features, and an RTEMS application is mostly a regular C or C++ program that uses the POSIX API.
   \comment{1-18}
@@ -329,7 +329,7 @@ For scalability purposes, MPPA-256 accepts a clustered architecture that avoids 
 Sixteen cores are packed as a cluster sharing 2 MB memory (SMEM), as shown in Fig. \ref{fig:cc_architecture}.
 This avoids frequent memory contention due to having numerous cores and helps in increasing the number of cores.
 However, the architecture constrains memory that can be directly accessed by the cores.
-Communicating with cores outside the cluster requires transferrinng data between clusters through the D-NoC with NoC interfaces.
+Communicating with cores outside the cluster requires transferring data between clusters through the D-NoC with NoC interfaces.
 
 An Rx interface exists on the receiving side to receive data with DMA.
 It is necessary to allocate a D-NoC Rx resource and configure the Rx to wait to receive the data.
@@ -605,7 +605,7 @@ A demonstration video of the adaptation of the parallelized self-localization al
 \label{sec:lessons}
 \comment{TBD: 3-4}
 Thus far, in Section \ref{sec:evaluations}, we have quantitatively clarified the characteristic of data transfer and parallel computing on NoC-based embedded many-core platforms.
-We can obtaine insight and guidelines for users and developers of NoC-based embedded many-core platforms through MPPA-256.
+We can obtain insight and guidelines for users and developers of NoC-based embedded many-core platforms through MPPA-256.
 
 From evaluations of D-NoC data transfer, we can learn two lessons: the influences of NoC routing and DMA.
 First, data transfer latencies between clusters are hardly influenced by routing for users as shown in Figs. \ref{fig:DDR_tx}, \ref{fig:DDR_uc}, \ref{fig:IO_SMEM_tx}, and \ref{fig:IO_SMEM_uc}.
@@ -613,7 +613,7 @@ Software transactions of transmitting and receiving in routers and RM are domina
 This is understandable owing to the minimized traffic conflicts of the evaluation setting.
 However, when the influence of routing comes to intensive concurrent traffic over a large portion of the network, different routes might still have nontrivial impacts on the end-to-end data transfer delay, especially for a detour route of a longer length.
 Second, in the IOS, the latency of a UC is not significantly affected by the memory location, the DDR or SMEM, at which the transferred buffer is allocated from the evaluation of Fig. \ref{fig:tx_uc_log}.
-The merit of the UC is profitable for users because this is a common situation for transferrinng data from the DDR to the CC SMEM using the UC, especially for large amount of data.
+The merit of the UC is profitable for users because this is a common situation for transferring data from the DDR to the CC SMEM using the UC, especially for large amount of data.
 
 From microbenchmarks of matrix calculation, we can learn three lessons of memory access: characteristics of the SMEM, influences of a cache, and data flow control on D-NoC.
 First, the memory access speed of the CC SMEM exceeds that of the IO SMEM as shown in Fig. \ref{fig:mat_calc_uncache}.
@@ -621,10 +621,10 @@ There is a significant difference, which is a major reason to work actively in t
 Second, we indicate quantitatively that the calculation speed without the cache in the CC SMEM in Fig. \ref{fig:mat_calc_uncache} exceeds that with the cache in Fig. \ref{fig:mat_calc_cache}.
 It is generally known that there is cache overhead when a miss hit occurs frequently, but it is notable that there is a substantial difference that cannot be ignored by the influences of a cache line.
 Third, when data are transferred in parallel from multiple CCs to the IO DDR, NoC routers' FIFO sometimes overflows owing to memory access delays of the DDR.
-This would ideally be expected to prevented by the transmission protocol and flow control.
+This would ideally be expected to be prevented by the transmission protocol and flow control.
 
 From the practical application viewpoint, since we parallelize the vehicle self-localization algorithm of the self-driving system, NoC-based embedded many-core systems can be used practically in real environments.
-We applied parallel data transfer from an IOS to CCs and parallel computing on the IOS and CCs by using the CC SMEM as scratch pad memory.    
+We applied for parallel data transfer from an IOS to CCs and parallel computing on the IOS and CCs by using the CC SMEM as scratch pad memory.    
 We also conducted demonstration experiments with real environments and confirmed the practicality of NoC-based embedded many-core systems.
 
 \chapter{Related Work}
@@ -643,7 +643,7 @@ Finally, discussions of previous work and comparisons with them are described.
 Table \ref{tb:comparison_platforms} summarizes the features of many-core platforms with those of other platforms.
 For instance, the GPU is a powerful device to enhance computing performance and has great potential in specific areas (for e.g., image processing, and learning).
 \comment{1-24}
-However, th GPU is mainly used for a specific purpose and its predictability is not suitable for real-time systems.
+However, the GPU is mainly used for a specific purpose and its predictability is not suitable for real-time systems.
 It is difficult to use a GPU for many kinds of applications and to guarantee its reliability due to the GPU architecture.
 Many-core processors based on CPU are significantly superior to GPU with respect to software programmability and timing predictability.
 \comment{1-25}
