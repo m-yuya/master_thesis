@@ -5,6 +5,6 @@
 *.dvi
 *.log
 *.toc
-figure/*.pdf
+*.pdf
 figure/data
 *_old.tex

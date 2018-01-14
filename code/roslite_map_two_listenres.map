@@ -1,0 +1,12 @@
+- name: talker
+  cluster: 1
+  publish: [/chatter]
+  subscribe: []
+- name: listener
+  cluster : 2
+  publish: []
+  subscribe: [/chatter]
+- name: listener2
+  cluster : 2
+  publish: []
+  subscribe: [/chatter]
