@@ -3,7 +3,7 @@
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\linewidth]{../figure/system_model.eps}
+  \includegraphics[width=0.6\linewidth]{../figure/Autoware/system_model.eps}
   \caption{\label{fig:system_model}
     Basic control and data flow of autonomous vehicles.}
 \end{figure}
@@ -21,7 +21,7 @@ prediction modules, while path planning falls into mission-based and
 motion-based modules.
 Each module employs corresponding algorithms.
 Those implemented in Autoware, in particular, are introduced in Section
-\ref{sec:autoware}.
+\ref{sec:algorithms}.
 
 Figure \ref{fig:system_model} shows a basic control and data flow of
 autonomous vehicles.
@@ -42,7 +42,7 @@ stroking, respectively.
 
 \begin{figure*}[!htbp]
   \centering
-  \includegraphics[width=0.9\linewidth]{../figure/system_stack.eps}
+  \includegraphics[width=0.9\linewidth]{../figure/Autoware/system_stack.eps}
   \caption{\label{fig:system_stack}
   Complete system stack of autonomous vehicles using Autoware.}
 \end{figure*}
@@ -58,7 +58,7 @@ vehicles.
 Autoware is based on Robot Operating System (ROS) and other
 well-established open-source software libraries, as shown in
 Figure~\ref{fig:system_stack}.
-We introduce a brief overview of ROS separately in Section~\ref{sec:ros}.
+We introduce a brief overview of ROS separately in Apendix A: Robot Operating System (ROS).
 Point Cloud Library (PCL) \cite{pcl} is mainly used to manage LiDAR
 scans and 3D maps.
 It is also used for data filtering and visualization.
@@ -102,7 +102,7 @@ called Kalray Massively Parallel Processor Array
 (MPPA)~\cite{yuya2017exploring}. 
 
 \section{Algorithms}
-\label{sec:system_model}
+\label{sec:algorithms}
 
 In this section, we present the detail of Autoware in accordance with
 Figure~\ref{fig:system_model}, with a particular emphasis on the modules
@@ -196,7 +196,7 @@ for their system.
 
 % \begin{figure}[htbp]
 %     \centering
-%     \includegraphics[width=1.0\linewidth]{../figure/rviz_localization.eps}
+%     \includegraphics[width=1.0\linewidth]{../figure/Autoware/rviz_localization.eps}
 %     \caption{\label{fig:rviz_localization}
 %     NDT scan matching localization using a 3D map and a 3D LiDAR scan.}
 % \end{figure}
@@ -249,7 +249,7 @@ localization.
 
 % \begin{figure}[htbp]
 %     \centering
-%     \includegraphics[width=1.0\linewidth]{../figure/rviz_detection.eps}
+%     \includegraphics[width=1.0\linewidth]{../figure/Autoware/rviz_detection.eps}
 %     \caption{\label{fig:rviz_detection}
 %     Object detection and traffic-light recognition with sensor fusion: (a) results of SSD objects detection, (b) projection of the 3D point-cloud data onto the image, (c) traffic-light positions of 3D map, (d) ROI and results of traffic-light recognition.}
 % \end{figure}
@@ -341,7 +341,7 @@ Our motion planner also updates the waypoints, considering obstacles on heading 
 
 \begin{figure*}[!htbp]
   \centering
-  \includegraphics[width=1.0\linewidth]{../figure/rviz_autoware.eps}
+  \includegraphics[width=1.0\linewidth]{../figure/Autoware/rviz_autoware.eps}
   \caption{\label{fig:rviz_autoware}
   Self-driving software packages in Autoware:
   (a) RViz visualization with high-definition and high-resolution geographical information,
