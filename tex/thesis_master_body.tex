@@ -57,14 +57,14 @@ Furthermore, MPPA-256 contains 16 clusters in which 16 cores are included and co
 Although the cores do not guarantee cache coherency, this significantly exceeds the number of cores in other COTS such as Tile-64 and Tile-Gx72.
 The clusters of cores are capable of running separate independent applications with respect to the desired power envelope of embedded applications.
 
-Despite the appearance of embedded many-core platforms, several difficulties persist in the adaptation of these platforms in embedded domain \cite{becker2016contention}, \cite{saidi2015shift}.
+Despite the appearance of embedded many-core platforms, several challenges persist in the adaptation of these platforms in embedded domain \cite{becker2016contention}, \cite{saidi2015shift}.
 In NoC-based embedded many-core platforms, researches on NoC-based many-core platforms do not fully reveal data transfer between distributed memories with NoC technology, memory access characteristics in NUMA, and parallelization potential in practical applications for application developers.
 Additionally, reuse of existing software application is difficult because application developers have to write platform oriented codes for NoC data transfer between clusters.
-For example, writing software for robotics system including self-driving system is difficult, particularly as the scale and scope of embedded software application continues to grow.
+For example, writing software for robotics systems including self-driving systems is difficult, particularly as the scale and scope of embedded software application continues to grow.
 
 To meet these challenges, we conduct evaluations to reveal the practicality of NoC-based many-core platforms and propose software framework called ROS-lite similar to Robot Operating System (ROS) \cite{quigley2009ros}, \cite{rosorg} for reuse of existing applications and efficient development on heterogeneous computing platforms.
 ROS, an open-source robot operating system, is structured communications layer above the host operating systems of a heterogeneous compute cluster and has been being rapidly developed and widely used in the robotics community \cite{cousins2011exponential}.
-(Please refer to Apendix A: Robot Operating System (ROS).)
+Please refer to Appendix A: Robot Operating System (ROS).
 This work explores scalable parallel computing and data allocation with quantitative evaluations and a practical application.
 As a reference embedded many-core platform, we have implemented evaluation program, practical applications, and ROS-lite on MPPA-256 \cite{de2014time} which adopts NUMA using NoC technology and realizes numerous cores with low power consumption.
 % The timing requirement of real-time embedded systems continues to warrant solutions.
@@ -89,11 +89,11 @@ We reveal the advantages and disadvantages of embedded many-core computing based
   \setlength{\leftskip}{-5mm}
   \item On DMA-capable NoC components, the evaluations of the data transfer quantitatively characterize the end-to-end latencies, which depend on the routing and DMA configurations, and the memory access speed, which varies according to where data are allocated and what accesses the memory.
   \item In many-core platforms based on NoC technology, the scalability of parallelization is observed in evaluations of matrix calculations in several situations and a real complex application as a part of a self-driving system.
-  \item Under limited memory, our proposed software framework provides structured communications layer and efficient development on heterogeneous computing platforms including NoC.
+  \item Under limited memory, the proposed software framework provides the structured communications layer and efficient development on heterogeneous computing platforms including NoC.
 \end{itemize}
 
 To the best of our knowledge, this is the first work that examines data transfer and data allocation matters for many-core computing beyond an intuitive expectation to allow system designers to choose appropriate data transfer methods.
-Additionally, the speed-up result of a self-driving application indicates a practical potential for NoC-based embedded many-core computing.
+Additionally, the speed-up result of a self-driving application indicates a practical potential for NoC-based embedded many-core computing and ROS-lite provides efficiency development framework in which many ROS nodes can run on many-core platforms and communicate with each other.
 \comment{1-8, 1-9}
 % It is expected that the findings of this study will potentially be applicable to several types of many-core architectures as opposed to just MPPA-256.
 % Therefore, the contributions of this study can be used in low-latency many-core computing.
@@ -105,7 +105,7 @@ The system model considered in this work is discussed in Chapter \ref{chap:syste
 \comment{1-10}
 Chapter \ref{chap:evaluations} explains evaluation setup and approach, and illustrates experimental evaluations.
 Chapter \ref{chap:related_work} examines the related work that focuses on multi-/many-core systems.
-Chapter \ref{chap:conclusion} presents the conclusions and directions for future research.
+Chapter \ref{chap:conclusion} presents the conclusions and directions for future work.
 
 
 \chapter{System Model}
@@ -358,19 +358,19 @@ Each method which application developers are able to use is described in detail 
 
 \begin{figure*}[!htbp]
   \centering
-  \includegraphics[width=0.7\linewidth]{../figure/roslite/system_model.eps}
+  \includegraphics[width=0.9\linewidth]{../figure/roslite/system_model.eps}
   \caption{\label{fig:rosl_system_model}
     Development flow of ROS-lite framework.}
 \end{figure*}
 
-The proposed framework, ROS-lite, is structured communications layer for efficient development on many-core platforms.
-Although existing ROS has been being rapidly developed and widely used, the ROS does not support NoC communication and embedded requirement such as RTOS and limited memory on embedded platforms.
+The proposed framework, ROS-lite, is a structured communications layer for efficient development on many-core platforms.
+Although existing ROS has been being rapidly developed and widely used, the ROS does not support NoC communication on many-core platforms and embedded requirement such as RTOSs and limited memory on embedded platforms.
 ROS-lite is a solution for these challenges and provides a development environment in which ROS nodes run on each core on many-core platforms and communicate with each other.
 By enabling and extending numerous existing ROS applications, transporting and new development on embedded platforms are made much more efficient.
-(For more information of ROS basic, please refer to Apendix A: Robot Operating System (ROS).)
+For more information of ROS basic, please refer to Appendix A: Robot Operating System (ROS).
 Additionally, being based on existing ROS framework, ROS-lite has potential to communicate external ROS nodes on other platform.
 Design of ROS-lite can enhance efficient development on heterogeneous computing platforms.
-In this paper, we target eMCOS as RTOS and MPPA-256 as an embedded many-core platform.
+In this paper, we target eMCOS as an RTOS and MPPA-256 as an embedded many-core platform.
 
 \section{ROS-lite Toolchain}
 \label{sec:toolchain}
@@ -393,43 +393,44 @@ In this paper, we target eMCOS as RTOS and MPPA-256 as an embedded many-core pla
   \end{tabular}
 \end{figure*}
 
-This section describes a system model and a proposed framework used to run ROS nodes on an embedded many-core platform.
-The system architecture of ROS-lite is shown in Fig. \ref{fig:rosl_system_model}.
+This section describes a proposed framework called ROS-lite used to run ROS nodes on an embedded many-core platform.
+The development flow of ROS-lite is shown in Fig. \ref{fig:rosl_system_model}.
 ROS-lite can run application codes written as ROS nodes.
 We assume that application codes following ROS manner are written in C++.
-Application developers can extract source codes (application codes and message structure files) from existing ROS packages them as they are.
+Application developers can extract source codes (application codes and message structure files) from existing ROS packages without change.
 For task mapping, developers edit an map file (\texttt{.map}) and assign ROS nodes to the clusters on many-core platforms.
 All developers have to do for modification of task mapping is editing map file.
-ROS nodes as processes on cores are described as publish/subscribe model, following message structures defined in message files (\texttt{.msg}).
-ROS nodes can communicate with each other via either innner-cluster or inter-cluster communications.
-While these cores do communications via shared memory in innner-cluster, the cores do communications via NoC in inter-cluster.
+ROS nodes as processes on cores are described as a publish/subscribe model, following message structures defined in message files (\texttt{.msg}).
+ROS nodes can communicate with each other via either inner-cluster or inter-cluster communications.
+While these cores do communications via shared memory in inner-cluster, the cores do communications via NoC in inter-cluster.
 
-Our framework provides code generation and build system by command line interface for efficient development.
+The framework provides code generation and build system by command line interface for efficient development.
 First, in \textcircled{\scriptsize 1} of Fig. \ref{fig:rosl_system_model}, a template of a map file (\texttt{.map}) is generated from application source codes.
-The map file (\texttt{.map}) contains node name, assigned cluster, information of topics published and subscribe to.
-These descriptions except for assigned cluster number is able to be interpreted from ROS nodes so that we provide code geraration for template codes.
+The map file (\texttt{.map}) contains node names, the assigned cluster, information of topics published and subscribe to.
+Please check Fig. \ref{code:map_file} for an example of map file's specifications.
+These descriptions except for assigned cluster number is able to be interpreted from ROS nodes so that we provide code generation for template codes.
 Application developers can focus on the number of assigned cluster.
-Second, in \textcircled{\scriptsize 2} of Fig. \ref{fig:rosl_system_model}, header files defining message structure are generated from message files (\texttt{.msg}) as an original ROS does.
+Second, in \textcircled{\scriptsize 2} of Fig. \ref{fig:rosl_system_model}, header files defining message structure are generated from message files (\texttt{.msg}) as the original ROS does.
 Note that generated header file has been made lighter because the part required by ROS-lite is generated.
 This code generation part is based on an original ROS's script and message files (\texttt{.msg}) can be described in the same manner.
-Developers do not have to modify message files (\texttt{.msg}) at all.
+Application developers do not have to modify message files (\texttt{.msg}) at all.
 Third, in \textcircled{\scriptsize 3} and \textcircled{\scriptsize 4} of Fig. \ref{fig:rosl_system_model}, initialization codes of launching processes of ROS nodes are generated from a map file (\texttt{.map}).
-ROS nodes are automatically launched as processes scheduled by RTOS on user-assigned clusters on embedded platforms.
+ROS nodes are automatically launched as processes scheduled by the RTOS on user-assigned clusters on embedded platforms.
 Application developers do not have to write codes except for ROS nodes.
-Finally, in \textcircled{\scriptsize 5} of Fig. \ref{fig:rosl_system_model}, a build script is generated from a user-defined map file (\texttt{.map}).
+Finally, in \textcircled{\scriptsize 5} of Fig. \ref{fig:rosl_system_model}, a build script is generated from the user-defined map file (\texttt{.map}).
 Source codes of ROS nodes are separately built in each user-assigned cluster because the executable files are loaded into separate memories for each cluster.
-This building process is conducted witd generated build script.
+This building process is conducted by generated build script.
 There is no need to modify build script each time developers change task mapping by modification of the map file (\texttt{.map}).
 All codes of ROS nodes are allocated in a same directory and are automatically built in each user-assigned cluster.
 
-We give a simple example for explaination of ROS-lite framework.
-One node publishes a \emph{chatter} topic and two nodes subscribe to the topic as shown in \ref{fig:rosl_example}.
+We give a simple example for explanation of ROS-lite framework.
+One node publishes a \emph{chatter} topic and two nodes subscribe to the topic as shown in Fig. \ref{fig:rosl_example}.
 Messages in the \emph{chatter} topic are defined as string type named \emph{data}.
 The publisher node is launched in \emph{cluster 1} and two subscriber node in \emph{cluster 2}, as described in assigned cluster number in the map file (\texttt{.map}) of Fig. \ref{code:map_file}.
 Application developers can change node mapping by modification of the field of cluster number.
 Information of topics in map file (\texttt{.map}) is used for initialization of the relationship between the topics and the nodes so that ROS-lite conducts the process of matching the nodes to communicate by topic names.
 These field of the node name and topic information are generated from source codes of ROS nodes, and initialization codes of the node relationship for ROS-lite are generated from the map file (\texttt{.map}).
-Note that the field of assigned cluster number has to be filled by developers.
+Note that the field of the assigned cluster number has to be filled by application developers.
 
 \section{Design and Implementation}
 \label{sec:design_and_implementation}
@@ -700,7 +701,7 @@ Note that the above evaluation results when Matrix C is allocated in the DDR.
 \label{sec:practical_application}
 This work adopts a portion of a self-driving system and this section demonstrates the parallelization potential of the MPPA-256.
 We selected an algorithm for vehicle self-localization written in C++ in Autoware, open-source software for urban self-driving \cite{autoware}, and a parallelized part of it.
-(Please refer to Apendix B: Autoware.)
+(Please refer to Appendix B: Autoware.)
 The self-localization adopts the normal-distribution transform matching algorithm \cite{magnusson2009three} implemented in the Point Cloud Library \cite{pcl}.
 A diagram depicting self-localization is shown in Fig. \ref{fig:ndt_matching_situation}.
 
