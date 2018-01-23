@@ -5,7 +5,15 @@
 # Target file name
 TARGET = abstract
 TEX_SRCS = 	*.tex
-			
+IMG_SRCS =	../../figure/*.eps			
+		
+# BIB file
+REFDIR = ../
+# REFDIR = ../../bib/
+REF = $(REFDIR)/reference.bib
+# CLASS File
+CLS = abstract.cls
+
 # platex
 PLATEX = platex
 # dvipdfmx
@@ -16,26 +24,28 @@ PBIBTEX = pbibtex
 # Objects
 OBJS := $(TARGET).aux $(TARGET).log $(TARGET).dvi $(TARGET).toc
 PDFOBJ := $(TARGET).pdf
+BIBOBJS := $(TARGET).bbl $(TARGET).blg
 
 #
 # Target
 #
 
 .PHONY: all
-all: dvi pdf
 # all: dvi adjust pdf
+all: dvi pdf
 
 .PHONY: dvi
 dvi: $(OBJS)
 
-$(OBJS): $(TARGET).tex $(TEX_SRCS)
+$(OBJS): $(TARGET).tex $(REF) $(TEX_SRCS) $(IMG_SRCS)
 	$(PLATEX) $(TARGET).tex
+	$(PBIBTEX) $(TARGET)
 	$(PLATEX) $(TARGET).tex
 
 .PHONY: pdf
 pdf: $(PDFOBJ)
 
-$(PDFOBJ): $(TARGET).dvi
+$(PDFOBJ): $(TARGET).dvi $(BIBOBJS)
 	$(PLATEX) $(TARGET).tex
 	$(DVIPDFMX) $(TARGET).dvi
 
