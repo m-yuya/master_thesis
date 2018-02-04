@@ -18,10 +18,13 @@
 \usepackage{nidanfloat}
 \usepackage{setspace}
 
+\usepackage{float}
+\usepackage{here}
+
 \usepackage{listings}
 \lstset{
 	%プログラム言語(複数の言語に対応，Python,C,C++も可)
- 	language = C,
+ 	language = C++,
  	%背景色と透過度
  	backgroundcolor={\color[gray]{.70}},
  	%枠外に行った時の自動改行
@@ -57,7 +60,8 @@
 
 % \newcommand{\comment}[1]{\colorbox{green}{#1}}
 \newcommand{\comment}[1]{}
-\newcommand{\memo}[1]{\colorbox{green}{#1} \\ }
+% \newcommand{\memo}[1]{\colorbox{green}{#1} \\ }
+\newcommand{\memo}[1]{}
 
 
 \setcounter{topnumber}{5}%    ページ上部の図表は 5 個まで
@@ -86,7 +90,7 @@
   \vspace{2cm}
   \vspace{1cm}
   \underline{\LARGE{Scalable Parallel Computing}} \\
-  \vspace{0.2cm}  
+  \vspace{0.2cm}
   \underline{\LARGE{on NoC-based Embedded Many-Core Platform}} \\  
   \vspace{0.5cm}
   \vspace{12mm}
@@ -100,11 +104,11 @@
   \vspace{6mm}
   \underline{\Large Yuya Maruyama}\\
   \vspace{10mm}
-  {\Large February 09, 2018}\\  
+  {\Large February 02, 2018}\\  
   \vspace{14mm}
-  {\Large Division of Mathematical Science for Social System,\\
-    Department of Systems Innovation,\\
-    Graduate School of Engineering Science, Osaka University}\\
+  {\Large Division of Mathematical Science for Social System,}\\
+  {\Large Department of Systems Innovation,}\\
+  {\Large Graduate School of Engineering Science, Osaka University}\\
 \end{center}
 \clearpage
 \setcounter{page}{0}
@@ -112,16 +116,16 @@
 
 %%%%%%%%%%%% 概要 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-  \memo{Add ROS-lite}
-  This paper presents evaluations of parallel computing on embedded many-core platforms.
+  This paper presents evaluations of parallel computing and software development framework called ROS-lite for NoC-based embedded many-core platforms.
   In embedded systems, high processing requirements and low power consumption require heterogeneous computing platforms including many-core platforms.
   Considering nonuniform memory access (NUMA) for scalability, many-core applications must be designed based on scalable data allocation and scalable parallel computing.
-  As a reference embedded many-core computing platform, we use the Massively Parallel Processor Arrays 256 (MPPA-256) developed by Kalray, one of the commercial off-the-shelf (COTS) multi-/many-core platforms.
+  % As a reference embedded many-core computing platform, we use the Massively Parallel Processor Arrays 256 (MPPA-256) developed by Kalray, one of the commercial off-the-shelf (COTS) multi-/many-core platforms.
   In this paper, we conduct evaluations of data transfer on network-on-chip (NoC) implementations, microbenchmarks, and parallelization of a practical application on NoC-based embedded many-core platforms.
-  We investigate currently achievable data transfer latencies between distributed memories on NoC systems, memory access characteristics with NUMA, and parallelization scalability of many cores.
+  Additionally, the proposed framework provides the structured communications layer on NoC components with few memory consumption and efficient software development for embedded many-core platforms.
+  We investigate currently achievable data transfer latencies between distributed memories on NoC components, memory access characteristics with NUMA, and parallelization scalability of many cores.
   As a practical application, we parallelize a portion of the self-driving algorithms on many-core processors.
   We believe that this performance level is acceptable for the real-world production of autonomous vehicles.
-  By highlighting many-core computing capabilities, we explore scalable parallel computing on NoC-based embedded many-core platforms.
+  By highlighting many-core computing capabilities and efficient software development, we explore scalable parallel computing on NoC-based embedded many-core platforms.
 \end{abstract}
 
 %%%%%%%%%%%% 目次 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,8 +157,14 @@
 %%%%%%%%%%%% Acknowledgement %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{acknowledgement}
-  This paper was partly supported by Toyota Motor Company, eSOL, and Kalray.
-  In addition, this research was partially supported by JST, PRESTO.
+  I would like to express my deep sense of gratitude to my adviser Professor Toshimitsu Ushio and Assistant Professor Takuya Azumi, Graduate School of Engineering Science, Osaka University, for their invaluable, constructive advice and constant encouragement during this work.
+  Professor Ushio and Assistant Professor Azumi's deep knowledge and their eyes for detail have inspired me much.
+  Without thier encouragement, this paper would not have materialized.
+  Assistant professor Azumi's deep knowledge and his eye for detail have inspired me much.
+
+  I am deeply grateful to Associate Professor Shinpei Kato, Graduate School of Information Science and Technology, the University of Tokyo, Atsushi Matsuo, and Masaki Gondo, eSOL Inc, for their helpful comments on this thesis and warm encouragement.
+  I also would like to thank all members of Ushio Laboratory for thier kind help and cooperation.
+  I am particularly grateful for the assistance given by research assistant Seiya Maeda, my colleage Shunsuke Hori, and Takuro Yamamoto.
 \end{acknowledgement}
 
 
@@ -168,18 +178,36 @@
 \chapter*{Publication List}
 \addcontentsline{toc}{chapter}{Publication List}
 
-% \section*{International Conference Proceedings}
-% \renewcommand{\labelenumi}{[\arabic{enumi}]}
-% \begin{enumerate}
-% \item Y.Maruyama, S.Kato, and T.Azumi,
-%   ``{Impact of DDS on ROS2},''
-%   \emph{In Proceedings of the 19th IEEE International Symposium on Real-Time Computing (ISORC2016)}, 2016.
-%   (submitted)
-% \item Y.Maruyama, S.Kato, and T.Azumi,
-%   ``{Preliminary Evaluation of ROS2},''
-%   \emph{WiP session of the ACM/IEEE 7th International Conference on Cyber-Physical Systems (ICCPS2016)}, 2016.
-%   (accepted)
-% \end{enumerate}
+\renewcommand{\labelenumi}{[\arabic{enumi}]}
+
+\section*{Journal}
+\begin{enumerate}
+\item Y.Maruyama, S.Kato, and T.Azumi,
+  ``{Scalable Parallel Computing on NoC-based Embedded Many-Core Platform},''
+  \emph{IEEE Transactions on Computers}, 2018.
+  (submitted)
+\end{enumerate}
+
+\section*{International Conference Proceedings}
+\begin{enumerate}
+\item Y.Maruyama, S.Kato, and T.Azumi,
+  ``{Exploring the Performance of ROS2},''
+  \emph{In Proceedings of the 13th ACM International Conference on Embedded Software (EMSOFT2016)}, pp. 5, 2016.
+\item Y.Maruyama, S.Kato, and T.Azumi,
+  ``{Exploring Scalable Data Allocation and Parallel Computing on NoC-based Embedded Many Cores},''
+  \emph{In Proceedings of the IEEE 35th International Conference on Computer Design (ICCD2017)}, pp. 225-228, 2017.
+\item S.Kato, S.Tokunaga, Y.Maruyama, S.Maeda, M.Hirabayashi, Y.Kitsukawa, A.Monrroy, T.Ando, Y.Fujii, and T.Azumi,
+  ``{Autoware on Board: Enabling Autonomous Vehicles with Embedded Systems},''
+  \emph{In Proceedings of the the ACM/IEEE 9th International Conference on Cyber-Physical Systems (ICCPS2018)}, 2018.
+\end{enumerate}
+
+\section*{Domestic Conference}
+\begin{enumerate}
+\item Y.Maruyama, S.Kato, and T.Azumi,
+  ``{Scalable Data Allocation and Parallel Computing on NoC-based Embedded Many Cores},''
+  \emph{In Proceedings of IPSJ Kansai-Branch Convention}, A-2, 2017.
+  (in Japanese)
+\end{enumerate}
 
 \end{document}
 

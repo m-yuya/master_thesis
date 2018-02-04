@@ -22,7 +22,7 @@ DVIPDFMX = dvipdfmx
 PBIBTEX = pbibtex
 
 # Objects
-OBJS := $(TARGET).aux $(TARGET).log $(TARGET).dvi
+OBJS := $(TARGET).aux $(TARGET).log $(TARGET).dvi $(TARGET).toc
 PDFOBJ := $(TARGET).pdf
 BIBOBJS := $(TARGET).bbl $(TARGET).blg
 
