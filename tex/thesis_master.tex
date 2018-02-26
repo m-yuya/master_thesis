@@ -79,7 +79,7 @@
 \renewcommand{\headfont}{\bfseries}
 
 % ページ数が少ないときはここを大きくしてごまかそう！！効果絶大！！
-\renewcommand{\baselinestretch}{1.1}
+% \renewcommand{\baselinestretch}{1.1}
 
 %%%%%%%%%%%% 題目 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%% ここも適当に変えてもいいと思う %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,16 +116,16 @@
 
 %%%%%%%%%%%% 概要 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-  This paper presents evaluations of parallel computing and software development framework called ROS-lite for NoC-based embedded many-core platforms.
-  In embedded systems, high processing requirements and low power consumption require heterogeneous computing platforms including many-core platforms.
-  Considering nonuniform memory access (NUMA) for scalability, many-core applications must be designed based on scalable data allocation and scalable parallel computing.
+  This thesis summarizes the development and testing of ROS-lite, a parallel computing and software development framework for embedded computing platforms based on network-on-chip (NoC) technology.
+  Such heterogeneous computing platforms are used because embedded systems often require powerful high processing capacity and low power consumption.
+  Since they implement nonuniform memory access (NUMA) for scalability, software for many-core platforms must be designed based on scalable data allocation and scalable parallelization.
   % As a reference embedded many-core computing platform, we use the Massively Parallel Processor Arrays 256 (MPPA-256) developed by Kalray, one of the commercial off-the-shelf (COTS) multi-/many-core platforms.
-  In this paper, we conduct evaluations of data transfer on network-on-chip (NoC) implementations, microbenchmarks, and parallelization of a practical application on NoC-based embedded many-core platforms.
-  Additionally, the proposed framework provides the structured communications layer on NoC components with few memory consumption and efficient software development for embedded many-core platforms.
-  We investigate currently achievable data transfer latencies between distributed memories on NoC components, memory access characteristics with NUMA, and parallelization scalability of many cores.
-  As a practical application, we parallelize a portion of the self-driving algorithms on many-core processors.
-  We believe that this performance level is acceptable for the real-world production of autonomous vehicles.
-  By highlighting many-core computing capabilities and efficient software development, we explore scalable parallel computing on NoC-based embedded many-core platforms.
+  This thesis reports the results of data transfer tests on NoC implementations, microbenchmarks, and parallelization of self-driving software for implementation on an embedded many-core processor.
+  ROS-lite, the proposed framework provides a structured communications layer for NoC components that reduces memory consumption and allows efficient software development for embedded many-core platforms.
+  Using NUMA and the parallelization scalability of many cores, the data transfer latencies that are currently achievable between distributed memory resources are investigated.
+  To test the practicality of embedded many-core platforms in a practical application, a module of a self-driving software suite is parallelized so that it can run on many-core processors.
+  This pilot test achieves performance levels that are acceptable for market-ready autonomous vehicles.
+  By highlighting many-core computing capabilities and efficient software development, I explore scalable parallel computing on NoC-based embedded many-core platforms.
 \end{abstract}
 
 %%%%%%%%%%%% 目次 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -140,16 +140,23 @@
 \input{thesis_master_body}
 
 %%%%%%%%%%%% Apendix %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
 
-\chapter*{Apendix A: Robot Operating System (ROS)}
-\addcontentsline{toc}{chapter}{Apendix A: Robot Operating System (ROS)}
 \setcounter{chapter}{1}
+\setcounter{section}{0}
+\setcounter{figure}{0}
+
+\chapter*{Appendix A: Robot Operating System (ROS)}
+\addcontentsline{toc}{chapter}{Appendix A: Robot Operating System (ROS)}
 
 \input{thesis_master_apendixA}
 
-\chapter*{Apendix B: Autoware}
-\addcontentsline{toc}{chapter}{Apendix B: Autoware}
-\setcounter{chapter}{1}
+\setcounter{chapter}{2}
+\setcounter{section}{0}
+\setcounter{figure}{0}
+
+\chapter*{Appendix B: Autoware}
+\addcontentsline{toc}{chapter}{Appendix B: Autoware}
 
 \input{thesis_master_apendixB}
 
@@ -159,7 +166,7 @@
 \begin{acknowledgement}
   I would like to express my deep sense of gratitude to my adviser Professor Toshimitsu Ushio and Assistant Professor Takuya Azumi, Graduate School of Engineering Science, Osaka University, for their invaluable, constructive advice and constant encouragement during this work.
   Professor Ushio and Assistant Professor Azumi's deep knowledge and their eyes for detail have inspired me much.
-  Without thier encouragement, this paper would not have materialized.
+  Without thier encouragement, this thesis would not have materialized.
   Assistant professor Azumi's deep knowledge and his eye for detail have inspired me much.
 
   I am deeply grateful to Associate Professor Shinpei Kato, Graduate School of Information Science and Technology, the University of Tokyo, Atsushi Matsuo, and Masaki Gondo, eSOL Inc, for their helpful comments on this thesis and warm encouragement.

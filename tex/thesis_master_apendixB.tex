@@ -1,9 +1,9 @@
 \section{System Model}
 \label{sec:system_model}
 
-\begin{figure}[!htbp]
+\begin{figure}[thbp]
   \centering
-  \includegraphics[width=0.6\linewidth]{../figure/Autoware/system_model.eps}
+  \includegraphics[width=0.9\linewidth]{../figure/Autoware/system_model.eps}
   \caption{\label{fig:system_model}
     Basic control and data flow of autonomous vehicles.}
 \end{figure}
@@ -35,30 +35,30 @@ velocities, which serve as commands for steering and stroking, respectively.
 
 \section{System Stack}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \includegraphics[width=0.9\linewidth]{../figure/Autoware/system_stack.eps}
   \caption{\label{fig:system_stack}
   Complete system stack of autonomous vehicles using Autoware.}
 \end{figure*}
 
-We designed a complete software stack for autonomous vehicles that are implemented with open-source software, as shown in
+Autonomous is designed for a complete software stack for autonomous vehicles that are implemented with open-source software, as shown in
 Figure~\ref{fig:system_stack}.
 The self-driving technology discussed herein is intended for vehicles that are driven in
 urban areas instead in freeways or highways.
-We contributed to the development of Autoware, a popular
+I contributed to the development of Autoware, a popular
 open-source software project developed for autonomous
 vehicles intended for using in urban areas.
 Autoware is based on Robot Operating System (ROS) and other
 well-established open-source software libraries, as shown in
 Figure~\ref{fig:system_stack}.
-Apendix A provides a brief overview of ROS.
+Appendix A provides a brief overview of ROS.
 Point Cloud Library (PCL) \cite{pcl} is mainly used to manage LiDAR
 scans and 3D mapping data, in addition to performing data-filtering and visualization functions.
 CUDA \cite{cuda} is a programming framework developed by NVIDIA and is used for general-purpose
 computing on GPUs (GPGPU).
 To handle the computation-intensive tasks involved in self-driving, GPUs running CUDA are
-promising solutions for self-driving technology, though this paper does
+promising solutions for self-driving technology, though this thesis does
 not focus on them.
 Caffe \cite{jia2014caffe}, \cite{caffe} is a deep learning
 framework designed with expression, speed, and modularity in mind.
@@ -84,7 +84,7 @@ The vehicle, computers, and sensors can be connected by Controller Area Network
 (CAN) bus, Ethernet, and/or USB 3.0.
 However, the specifications of sensors and computers required for a particular application depend closely on
 specific functional requirements of the autonomous vehicle.
-Autoware supports range sensor, and we chose Velodyne HDL-32e LiDAR scanners and PointGrey
+Autoware supports range sensor, and I chose Velodyne HDL-32e LiDAR scanners and PointGrey
 Grasshopper3 cameras for our prototype system.
 Autoware also supports a range of processors.
 Many users run Autoware on desktops and laptops.
@@ -98,7 +98,7 @@ the Kalray Massively Parallel Processor Array
 
 This section briefly discusses Autoware modules marked in
 Figure~\ref{fig:system_model} emphasizing on the modules
-that we developed and extended for using in DRIVE PX2.
+that are developed and extended for using in DRIVE PX2.
 The remaining models of Autoware can be studied on its
 project repository~\cite{autoware}.
 Note that Autoware is designed for autonomous vehicles to be used in urban areas, so additional modules
@@ -119,7 +119,7 @@ Cameras are often used to recognize traffic lights and objects and are sometimes
 superior to LiDAR scanners in recognizing object features and providing better sampling rates.
 
 Raw point-cloud data requires filtering and pre-processing.
-We apply the Normal Distributions Transform (NDT)
+Autoware applies the Normal Distributions Transform (NDT)
 algorithm \cite{biber2003normal} for 3D point-cloud pre-processing. 
 The data can be reduced to approximate
 points in the lattice by replacing the original points with voxels in a computational lattice \cite{magnusson2009three}.
@@ -187,12 +187,12 @@ for their system.
 Autoware must next detect surrounding objects, such as
 vehicles, pedestrians, and traffic signals, to avoid accidents or
 violations of traffic rules.
-Autoware recognizes traffic signals and lights; however, we primarily focus on moving objects such as vehicles and pedestrians.
+Autoware recognizes traffic signals and lights; however, this section primarily focus on moving objects such as vehicles and pedestrians.
 Autoware supports deep learning \cite{liu2016ssd},
 \cite{DBLP:journals/corr/RedmonF16} and pattern recognition
 \cite{felzenszwalb2010object} for object detection
 using libraries such as Caffe and OpenCV.
-As shown in Figure \ref{fig:rviz_autoware} (c), we primarily use SSD \cite{liu2016ssd} and the You only look once (Yolo2) algorithms
+As shown in Figure \ref{fig:rviz_autoware} (c), Autoware primarily use SSD \cite{liu2016ssd} and the You only look once (Yolo2) algorithms
 \cite{DBLP:journals/corr/RedmonF16}, which are based on deep learning.
 They are unified frameworks for object detection that use a single neural
 network and allow real-time object detection.
@@ -207,12 +207,12 @@ This distance information can be used to range and track objects that are
 classified by 2D image processing algorithms.
 
 Assuming that localization is precise and a 3D map has been constructed for the area
-wherein the autonomous vehicle is driven, we improve upon Autoware's accuracy at recognizing traffic signals and traffic lights.
+wherein the autonomous vehicle is driven, I improve upon Autoware's accuracy at recognizing traffic signals and traffic lights.
 Autoware determines the exact road area in the image by projecting the 3Dmap onto an image originating at the current position.
 The region of interest (ROI) for image
 processing can be constrained to this area, thereby reducing execution time and
 the occurrence of false positives.
-To obtain ROIs, we calibrated the 3D LiDAR data to the 2D camera in advance, as
+To obtain ROIs, I calibrated the 3D LiDAR data to the 2D camera in advance, as
 this calibration cannot be performed by the prototype while operating.
 Our ROI approach can recognize traffic signals from 2D images, as shown in Figures \ref{fig:rviz_autoware} (f) and (g).
 In general, traffic light recognition is the most
@@ -242,12 +242,12 @@ The detected and tracked objects in the 2D image can be combined with clustered 
 this process is referred to as sensor fusion with projection and re-projection.
 The sensor fusion parameters are determined in the lab while calibrating the LiDAR scanner to the 2D camera.
 
-We support scene recognition with sensor fusion of the camera and 3D LiDAR sensor.
-We can then project the 3D point-cloud information obtained by the 3D LiDAR sensor onto 2D images, thereby adding depth information to the image and filtering for ROIs.
+Autoware support scene recognition with sensor fusion of the camera and 3D LiDAR sensor.
+You can then project the 3D point-cloud information obtained by the 3D LiDAR sensor onto 2D images, thereby adding depth information to the image and filtering for ROIs.
 Figures \ref{fig:rviz_autoware} (d) and (e) show the results of projection and adding bounding boxes to clustered 3D point-cloud objects projected onto the image.
 
 The detected and tracked objects on the image can be re-projected onto the 3D point-cloud coordinates using the same extrinsic parameters.
-We also use the reprojected object positions to determine the motion plan and, partially, the overall trajectory.
+You also use the reprojected object positions to determine the motion plan and, partially, the overall trajectory.
 
 \subsubsection{Decision}
 \label{sec:decision}
@@ -255,12 +255,12 @@ We also use the reprojected object positions to determine the motion plan and, p
 After Autoware recognizes relevant obstacles and traffic signals in the environment, it can plot the trajectories of other moving objects and make decisions about mission and motion planning.
 The prediction and comprehensive decision-making modules are under development in our self-driving platform.
 
-We adopt a state machine and machine learning intelligence for understanding, forecasting, and decision-making in response to road scenarios.
+Autoware adopt a state machine and machine learning intelligence for understanding, forecasting, and decision-making in response to road scenarios.
 Our platform enables drivers to supervise the state of the vehicle while making comprehensive decisions for the planning modules to execute.
 
 \subsubsection{Planning}
 This module plans trajectories following the decision-making module's output.
-We break path planning into mission and motion planning.
+Autoware break path planning into mission and motion planning.
 The platform plans a global trajectory based on the current location and specified destination and conducts basic local motion planning to determine the overall trajectory.
 Available graph-search algorithms include hybrid-state A* \cite{dolgov2010path}, and trajectory generation algorithms include \cite{nagy2001trajectory} such as lattice-based algorithms \cite{darweesh2017open}.
 % A demonstration video of the adaptation of OpenPlanner to Autoware can be seen at: https://www.youtube.com/watch?v=FKM8v79X3_s
@@ -281,7 +281,7 @@ The motion planner adjusts self-driving in response to driving behavior, which i
 Hence, the prototype platform currently provides only a basic motion-planning strategy to allow us to build a high-level intelligence for making comprehensive decisions.
 Constrained by the current and goal states of the vehicle, a feasible trajectory must be generated dynamically from the travelable area based on the 3D map and with consideration of surrounding objects and traffic rules.
 
-In unstructured environments, such as parking lots, we implement graph-search algorithms, such as A* \cite{hart1968formal} and hybrid-state A* \cite{dolgov2010path}, to find the minimum-cost path to the goal using a cost map, as shown in Figures \ref{fig:rviz_autoware} (h) and (i).
+In unstructured environments, such as parking lots, Autoware can use graph-search algorithms, such as A* \cite{hart1968formal} and hybrid-state A* \cite{dolgov2010path}, to find the minimum-cost path to the goal using a cost map, as shown in Figures \ref{fig:rviz_autoware} (h) and (i).
 Although graph-search algorithms consume a great deal of processing power, they can analyze complex scenarios.
 In contrast, in structured environments, such as roads and traffic lanes, vertices are likely to be dense and and irregularly distributed, which constrains the options for feasible headings.
 Therefore,for urban areas, the prototype uses spatiotemporal lattice-based algorithms to adapt motion plans to the environment \cite{mcnaughton2011motion}.
@@ -310,14 +310,14 @@ Our motion planner also updates the waypoints accordingly, considering obstacles
 
 \clearpage
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \includegraphics[width=1.0\linewidth]{../figure/Autoware/rviz_autoware.eps}
   \caption{\label{fig:rviz_autoware}
   Self-driving software packages in Autoware:
   (a) RViz visualization with high-definition and high-resolution geographical information,
   (b) NDT scan matching localization using a 3D map and a 3D LiDAR scan,
-  (c) deep learning based object detection with Single Shot multibox Detector (SSD),
+  (c) deep learning based object detection with the You only look once (Yolo2) algorithms,
   (d) projection of the 3D point-cloud data onto the image,
   (e) calibrated data fusion for LiDAR clouds and images data,
   (f) traffic light positions extracted from the 3D map,

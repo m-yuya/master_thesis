@@ -11,13 +11,11 @@
 \chapter{Introduction}
 \label{chap:introduction}
 \comment{1-4, 1-5, 1-6, 2-1, 2-4}
-The evolution of a next-generation computing platform oriented toward having multi-/many-core platforms is necessary to satisfy the demand for increasing computation in conjunction with reasonable power consumption in several domains such as automobiles.
-This trend is also adapted to embedded systems because of high processing requirements.
-For example, self-driving systems involve various applications and are sometimes characterized by demands for high-performance computing.
-Considering the requirements of high processing, predictability, and energy efficiency for self-driving systems, such systems require a heterogeneous computing system such as multi-/many-core platforms and graphical processing units (GPU).
-(This is discussed in Chapter \ref{chap:related_work}.)
-\comment{1-3} In embedded systems, multi-/many-core architectures are an important trend as the architecture integrates cores to realize high-performance and general-purpose computing with low power consumption \cite{becker2016contention}, \cite{perret2016mapping}.
-Extant studies have examined several applications of multi/many-core platforms \cite{becker2016contention}, \cite{saidi2015shift}, \cite{perret2016temporal}, \cite{perret2016mapping}, \cite{becker2014mapping}, \cite{BURGIO2017299}.
+The evolution of next-generation computing platforms with multi-/many-core platforms is required to satisfy the increasing demands for computational power with reasonable power consumption.
+This trend also applies to embedded systems such as those used in autonomous vehicles.
+Since autonomous driving requires fast processing, predictability, and energy efficiency for several computational modules,  heterogeneous computing systems such as multi-/many-core platforms and graphical processing units (GPU), are often employed.
+\comment{1-3} Multi-/many-core architectures can realize high-performance and general-purpose computing with low power consumption for embedded systems \cite{becker2016contention}, \cite{perret2016mapping}.
+Recent studies have examined several applications for multi/many-core platforms \cite{becker2016contention}, \cite{saidi2015shift}, \cite{perret2016temporal}, \cite{perret2016mapping}, \cite{becker2014mapping}, \cite{BURGIO2017299}.
 % Recently, the computational ability of single core processors has reached its limit \comment{1-3} and thus the applicability of Moore's law \cite{moore2006cramming} is unclear.
 % Multi/many core architecture is an important trend in \comment{1-3} recent years as it integrates cores to realize high-performance and general-purpose computing with low power consumption.
 % Hence, high energy efficiency is a superior feature of multi/many core platforms.
@@ -45,29 +43,29 @@ Extant studies have examined several applications of multi/many-core platforms \
 % Weight reduction is the most important factor for avionics, and integration with a multi/many core platform reduces the number of processing boards and cooling units.
 % Thus, an integrated platform results in space, weight and cost reductions.
 
-Based on the above background, multi/many-core platforms are fabricated and released as commercial off-the-shelf (COTS) multicore components.
-(e.g., the Massively Parallel Processor Arrays (MPPA) 256 developed by Kalray \cite{de2013clustered} \cite{de2014time}, Tile-Gx developed by Tilera \cite{ramey2011tile} \cite{schooler2010tile}, Tile-64 developed by Tilera \cite{bell2008tile64}, Xeon Phi developed by Intel \cite{chrysos2014intel}, \cite{chrysos2012intel}, and Single-chip Cloud Computer (SCC) developed by Intel \cite{baron2010single})
-Several platforms such as MPPA-256 and Tile-64 target embedded systems, and the research focused on multi-/many-core platforms has received increasing attention \cite{kanter2015kalray}, \cite{denet2017work}, \cite{perret2016predictable}.
-We discuss comparisons of many-core platforms in Chapter \ref{chap:related_work}.
+Multi/many-core platforms are available as commercial off-the-shelf (COTS) multicore components, such as massively parallel processor arrays (MPPA) 256 developed by Kalray \cite{de2013clustered} \cite{de2014time}, Tile-Gx \cite{ramey2011tile} \cite{schooler2010tile} and Tile-64 developed by Tilera \cite{bell2008tile64}, Xeon Phi developed by Intel \cite{chrysos2014intel}, \cite{chrysos2012intel}, and the single-chip cloud computer (SCC) developed by Intel \cite{baron2010single}.
+Several of these platforms such as MPPA-256 and Tile-64 are intended for embedded systems, and studies focused on multi-/many-core platforms have gained increased attention \cite{kanter2015kalray}, \cite{denet2017work}, \cite{perret2016predictable}.
+Available many-core platforms are compared in Chapter \ref{chap:related_work}.
 
-In embedded many-core platforms, nonuniform memory access (NUMA) and distributed memories connected with network-on-chip (NoC) components are an important approach for core scalability and power consumption.
-Several COTS platforms include NoC technology and a cluster of many-core architectures in which cores are \comment{1-7} allocated closely.
-For instance, MPPA-256 and Tile-Gx72 have NoC components to share distributed memories instead of shared buses.
-Furthermore, MPPA-256 contains 16 clusters in which 16 cores are included and contains 256 general-purpose cores in total.
-Although the cores do not guarantee cache coherency, this significantly exceeds the number of cores in other COTS such as Tile-64 and Tile-Gx72.
-The clusters of cores are capable of running separate independent applications with respect to the desired power envelope of embedded applications.
+Nonuniform memory access (NUMA) and distributed memory devices connected with network-on-chip (NoC) components allow core scalability and reduce power consumption.
+Several COTS platforms include NoC technology and a cluster of many-core processors in which the cores are \comment{1-7} allocated closely.
+For instance, MPPA-256 and Tile-Gx72 use NoC components to share distributed memory, instead of shared buses.
+MPPA-256 contains 16 clusters of 16 cores for 256 general-purpose cores in total.
+Although these cores do not guarantee cache coherency, MPPA-256 significantly exceeds the number of cores available in other COTS, such as Tile-64 and Tile-Gx72.
+The clusters of cores can run independent applications separately to achieve the desired power envelope for embedded applications.
 
-Despite the appearance of embedded many-core platforms, several challenges persist in the adaptation of these platforms in embedded domains \cite{becker2016contention}, \cite{saidi2015shift}.
-In NoC-based embedded many-core platforms, researches on NoC-based many-core platforms do not fully reveal data transfer between distributed memories with NoC technology, memory access characteristics in NUMA, and parallelization potential in practical applications for application developers.
-Additionally, reuse of existing software application is difficult because application developers have to write platform oriented codes for NoC data transfer between clusters.
-For example, writing software for robotics systems including self-driving systems is difficult, particularly as the scale and scope of embedded software application continues to grow.
+Despite these recent developments in embedded many-core platforms, several challenges persist for adapting these platforms in embedded applications \cite{becker2016contention}, \cite{saidi2015shift}.
+In NoC-based embedded many-core platforms, studies on NoC-based many-core platforms did not completely reveal the details of data transfer between distributed memory banks with NoC technology, memory-access characteristics for NUMA, and the strategies that developers can use for parallelization in practical applications.
+In addition, reusing existing software on these platforms is difficult because application developers have to write platform-specific codes for NoC data transfer between clusters.
+Writing source code for robotics systems is difficult, in particular, when the scale and scope of embedded software applications continue to grow.
 
-To meet these challenges, we conduct evaluations to reveal the practicality of NoC-based many-core platforms and propose software development framework called ROS-lite similar to Robot Operating System (ROS) \cite{quigley2009ros}, \cite{rosorg} for reuse of existing applications and efficient development on heterogeneous computing platforms.
-ROS, an open-source robot operating system, is structured communications layer above the host operating systems of a heterogeneous compute cluster and has been being rapidly developed and widely used in the robotics community \cite{cousins2011exponential}.
-Please refer to Appendix A: Robot Operating System (ROS).
-This work explores scalable parallel computing and data allocation with quantitative evaluations and a practical application.
-As a reference embedded many-core computing platform, we have used the Massively Parallel Processor Arrays 256 (MPPA-256) developed by Kalray, one of the commercial off-the-shelf (COTS) multi-/many-core platforms.
-We have implemented evaluation program, practical applications, and ROS-lite on MPPA-256 \cite{de2014time} which adopts NUMA using NoC technology and realizes numerous cores with low power consumption.
+To meet these challenges, the practicality of NoC-based many-core platforms is evaluated, and a software development framework, such as the robot operating system (ROS) \cite{quigley2009ros}, \cite{rosorg} which allows reusing existing applications and efficiently developing on heterogeneous computing platforms, is proposed.
+The developed framework is called ROS-lite.
+ROS, an open-source robot operating system, is a structured communications layer above the host operating systems of a heterogeneous computing cluster.
+ROS is widely used in the robotics community \cite{cousins2011exponential}, as detailed in Appendix A: ROS.
+Scalable parallel computing and data allocation are tested via quantitative evaluations and an applied test.
+The MPPA-256 serves as a reference platform.
+MPPA-256 \cite{de2014time} adopts NUMA using NoC technology and realizes numerous cores with low power consumption, and it is tested using the evaluation code, ROS-lite, and in a practical application.
 % The timing requirement of real-time embedded systems continues to warrant solutions.
 % The impact of integrating applications in multi/many-core platforms is not completely understood to date.
 % This is a critical issue because embedded systems have requirements for reliable and predictable behavior.
@@ -80,45 +78,45 @@ We have implemented evaluation program, practical applications, and ROS-lite on 
 
 \textbf{Contributions:}
 \comment{1-1, 3-3: To be clarified}
-This work focuses on examining embedded many-core computing based on NoC technology, such as MPPA-256.
-We conduct evaluations of data transfer methods on NoC components and microbenchmarks with matrix calculation to clarify latency characteristics of data transfer, parallel computing, and the influence of data allocation.
-Subsequently, we parallelize a localization algorithm that is the core of the self-driving system.
-Finally, this paper for the first time presents a light weight ROS architecture supporting NoC called ROS-lite on embedded many-core platforms.
-We reveal the advantages and disadvantages of embedded many-core computing based on NoC technology in a quantitative manner by introducing the following contributions:
+This thesis evaluates the usefulness of embedded many-core computing platforms based on NoC technology, such as MPPA-256.
+The data transfer methods are evaluated using microbenchmarks with matrix calculation to clarify the latencies involved in data transfer on NoC components, parallel computing, and the influence of data allocation.
+Next, the localization algorithm that is the core of a self-driving system is parallelized.
+Finally, a novel light-weight ROS architecture, called ROS-lite, is proposed herein.
+The advantages and disadvantages of embedded many-core computing platforms are quantified based on NoC technology with the following main innovations:
 
 \begin{itemize}
   \setlength{\leftskip}{-5mm}
-  \item On DMA-capable NoC components, the evaluations of the data transfer quantitatively characterize the end-to-end latencies, which depend on the routing and DMA configurations, and the memory access speed, which varies according to where data are allocated and what accesses the memory.
-  \item In many-core platforms based on NoC technology, the scalability of parallelization is observed in evaluations of matrix calculations in several situations and a real complex application as a part of a self-driving system.
-  \item Under limited memory, the proposed software framework provides the structured communications layer and efficient development on heterogeneous computing platforms including NoC.
+  \item On DMA-capable NoC components, data-transfer tests quantitatively measure the end-to-end latencies and the memory access speed.
+  \item The scalability of parallelization is measured via the evaluation of complex matrix calculations and a real implementation of one module of a self-driving system.
+  \item With limited memory available, the proposed software framework provides a structured communications layer and efficient development for heterogeneous computing platforms.
 \end{itemize}
 
-To the best of our knowledge, this is the first work that examines data transfer and data allocation matters for many-core computing beyond an intuitive expectation to allow system designers to choose appropriate data transfer methods.
-Additionally, the speed-up result of a self-driving application indicates a practical potential for NoC-based embedded many-core computing and ROS-lite provides efficiency development framework in which many ROS nodes can run on many-core platforms and communicate with each other.
+To the best of our knowledge, this is the first study that quantitatively evaluates data transfer and data allocation matters for many-core computing platforms.
+Our quantitative methods offer application developers more insight than their current reliance on intuition when designing strategies for data allocation. 
+The demonstration of computation speed improvements for a self-driving application indicates the practical potential for NoC-based embedded many-core computing.
+ROS-lite provides an efficient development framework wherein ROS nodes can run on many-core platforms and communicate with each other.
 \comment{1-8, 1-9}
 % It is expected that the findings of this study will potentially be applicable to several types of many-core architectures as opposed to just MPPA-256.
 % Therefore, the contributions of this study can be used in low-latency many-core computing.
 
 \textbf{Organization:}
-The remainder of this work is organized as follows.
-The system model considered in this work is discussed in Chapter \ref{chap:system_model} in which the hardware model, namely Kalray MPPA-256 Bostan, and the system model are presented.
-Subsequently, the proposed software framework called ROS-lite is presented in Chapter \ref{chap:proposed_framework}.
-We introduce its development flow and discuss the design and implementations.
-Chapter \ref{chap:evaluations} explains evaluation setup and approach, and illustrates experimental evaluations.
-Chapter \ref{chap:related_work} examines the related work that focuses on multi-/many-core systems.
-Chapter \ref{chap:conclusion} presents the conclusions and directions for future work.
+The remainder of this thesis is organized as follows.
+Chapter \ref{chap:system_model} discusses the reference hardware model, the Kalray MPPA-256 Bostan, and the system model.
+The proposed ROS-lite software framework is presented in Chapter \ref{chap:proposed_framework}, which discusses the development flow, the design, and implementations.
+Chapter \ref{chap:evaluations} explains the evaluation tests and methods and illustrates the experimental evaluation.
+Chapter \ref{chap:related_work} reviews the related work that focuses on multi-/many-core systems.
+Chapter \ref{chap:conclusion} presents conclusions and directions for future work.
 
 
 \chapter{System Model}
 \label{chap:system_model}
-This section presents the system model used throughout the work.
+This chapter presents the system model used throughout the work.
 The many-core model of Kalray MPPA-256 Bostan is considered.
 First, a hardware model is introduced in Section \ref{sec:hardware_model}, followed by a software model in Section \ref{sec:software_model}.
 
 \section{Hardware Model}
 \label{sec:hardware_model}
-The MPPA-256 processor is based on an array of computing clusters (CCs) and I/O subsystems (IOSs) that are connected to NoC nodes with a toroidal two-dimensional topology 
-(as shown in Figs. \ref{fig:mppa_architecture}, \ref{fig:cc_architecture} and \ref{fig:noc_map}).
+The MPPA-256 processor is based on an array of computing clusters (CCs) and I/O subsystems (IOSs) that are connected to NoC nodes with a toroidal two-dimensional topology, as shown in Figs. \ref{fig:mppa_architecture}, \ref{fig:cc_architecture} and \ref{fig:noc_map}.
 The MPPA many-core chip integrates 16 CCs and 4 IOSs on NoC.
 The architecture of Kalray MPPA-256 is presented in this section.
 
@@ -145,12 +143,13 @@ Each IOS consists of quad IO cores and a NoC interface.
   The UC can extract data from memory by using a programmed pattern and send the data on the NoC.
   After the UC is initiated, this continues in an autonomous fashion without using a processing element (PE) and an IO core.
 \end{itemize}
-\begin{figure*}[!htbp]
+
+\begin{figure*}[thbp]
   \centering
   \includegraphics[width=0.9\linewidth]{../figure/mppa_architecture.eps}
       \caption{\label{fig:mppa_architecture}
     An overview of the architecture of the Kalray MPPA-256 Bostan.}
-  \end{figure*}
+\end{figure*}
 
 \subsection{Compute Clusters (CCs)}
 \label{sec:cc}
@@ -176,7 +175,7 @@ Fig. \ref{fig:cc_architecture} illustrates the architecture of each CC.
   The CC DMA engine also has the following three interfaces: an Rx, a Tx, and a UC. 
   The CC DMA engine is instantiated in every cluster and connected to the SMEM.
 \end{itemize}
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \includegraphics[width=0.7\linewidth]{../figure/cc_architecture.eps}
   \caption{\label{fig:cc_architecture}
@@ -224,7 +223,7 @@ Furthermore, NoC is constructed \comment{1-12} as the bus network and has router
 \section{Software Model}
 \label{sec:software_model}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \includegraphics[width=0.7\linewidth]{../figure/softwarestack.eps}   
   \caption{\label{fig:software_stack}
@@ -294,38 +293,36 @@ RTMES and NodeOS are provided by Kalray and eMCOS is released by eSOL.
 \subsection{NoC Data Transfer Methods}
 \label{sec:data_transfer_methods}
 \comment{TBD: 1-19: To be fully refleshed, Add setup and approach}
-In this section, data transfer methods in MPPA-256 are explained.
-For scalability purposes, MPPA-256 accepts a clustered architecture that avoids frequent memory contention between numerous cores, and it also accepts clustered architectures in which each cluster contains its own memory.
-Sixteen cores are packed as a cluster sharing 2 MB memory (SMEM), as shown in Fig. \ref{fig:cc_architecture}.
-This avoids frequent memory contention due to having numerous cores and helps in increasing the number of cores.
-However, the architecture constrains memory that can be directly accessed by the cores.
-Communicating with cores outside the cluster requires transferring data between clusters through the D-NoC with NoC interfaces.
+This section explains the data transfer methods used in MPPA-256.
+For scalability purposes, MPPA-256 implements a clustered architecture that reduces memory contention between numerous cores and associates memory with each cluster.
+Sixteen cores are packed in a cluster, and each of these clusters share 2 MB memory (SMEM), as shown in Fig. \ref{fig:cc_architecture}.
+This reduces memory contention that frequently occurs with numerous cores and helps to increase the number of cores.
+However, the clustered architecture constrains the memory that can be directly accessed by each core.
+Communicating with cores outside the cluster requires transferring data between clusters through the D-NoC via NoC interfaces.
 
-In a low-level layer, each cluster on MPPA-256 contains hardware for a NoC interface, which has DMA units accounting for data receiving and sending: an Rx, Tx, and UC interfaces.
+In the lowest-level layer, each cluster on MPPA-256 contains hardware for a NoC interface, which has DMA units that handle data receiving and sending: Rx, Tx, and UC interfaces.
 
-An Rx interface exists on the receiving side to receive data with DMA.
-It is necessary to allocate a D-NoC Rx resource and configure the Rx to wait to receive the data.
-A DMA in a NoC interface contains 256 D-NoC Rx resources.
+An Rx interface is installed on the receiving side to receive data with DMA.
+A D-NoC Rx resource must be allocated and configured the Rx to wait for receiving the data.
+The DMA in each NoC interface contains 256 D-NoC Rx resources.
 
-Two interfaces, the Tx interface and the UC interface as explained in Sections \ref{sec:ios} and \ref{sec:cc},
-are present with respect to the sending side for users to send data between clusters.
-The UC is a network processor that is programmed to set threads to send data in DMA.
+The Tx and UC interfaces (explained in Sections \ref{sec:ios} and \ref{sec:cc}) manage the sending side that programs use to send data between clusters.
+The UC is a network processor programmed to set threads to send data in DMA.
 The UC executes programmed patterns and sends data through the D-NoC without a PE or an RM.
-The UC interface results in higher data transfer throughput compared to the direct activation of the Tx interface.
-However, a DMA in a NoC interface contains only eight D-NoC UC resources.
-Both interfaces use a DMA engine to access memory and copy data.
-Regardless of whether a UC interface is used, it is necessary to allocate a D-NoC Tx resource and configure the Tx to send data.
-Additionally, it is necessary to allocate and configure D-NoC UC resources, if a UC interface is used.
+The UC interface results in higher data transfer throughput compared with the direct activation of the Tx interface.
+However, the DMA in each NoC interface contains only eight D-NoC UC resources.
+Both the interfaces use a DMA engine to access memory and copy data.
+Regardless of whether a UC interface is used, a D-NoC Tx resource must be allocated and configured to send data.
+In addition, D-NoC UC resources must be allocated and configured, if a UC interface is used.
 
-Application developers have several choices to transfer data on D-NoC between clusters.
-Kalray provides mppa\_noc and mppa\_async libraries and eMCOS provides two kinds of message APIs.
-Table \ref{tb:comparison_noc} compares features of each method.
-Specifications are different for each method, and it is necessary to use properly according to the purpose.
-In an internal implementation, all methods are based on mppa\_noc.
-mppa\_noc is low-level NoC communication library and provides users interfaces to handle DMA resources such as an Rx, Tx and UC interfaces for NoC data transfer.
-Each method which application developers are able to use is described in detail as below.
+Several options are available for data transfer between clusters on D-NoC.
+Kalray provides mppa\_noc and mppa\_async libraries and eMCOS provides two type of message APIs.
+Table \ref{tb:comparison_noc} lists the features of each method for comparison.
+The specifications are different for each method; therefore an appropriate method must be chosen according to the application.
+For an internal implementations, all methods are based on mppa\_noc which is a low-level NoC communication library that provides interfaces to handle DMA resources, such as Rx, Tx, and UC interfaces for data transfer.
+A detailed description of each available NoC data transfer method is given below.
 
-\begin{table*}[!htbp]
+\begin{table*}[thbp]
   \caption{\label{tb:comparison_noc}
     Comparison of NoC Data Transfer Methods}
   \centering
@@ -347,214 +344,219 @@ Each method which application developers are able to use is described in detail 
 
 \begin{itemize}
   \setlength{\leftskip}{-5mm}
-  \item \textbf{mppa\_noc}: This is the most low-level NoC communication library for D-NoC and C-NoC components.
-  This library handles all interfaces such as the Rx, Tx, and the UC.
+  \item \textbf{mppa\_noc}: This is the lowest-level NoC communication library for D-NoC and C-NoC components.
+  This library handles all interfaces (Rx, Tx, and the UC).
   Users allocate DMA resources and configure them for NoC transport.
-  After data transfer, users have to free the resources.
-  Although users have to manage DMA resources, users can finely configure interfaces including transport routes on NoC components and send/receive buffers.
-  \item \textbf{mppa\_async}: The Asynchronous communication API is used for asynchronous operations based on one-sided communications between the CC's local memories and I/O cluster DDR memories. 
-  This API is designed to support applications in CCs that need to access remote memory, whether the DDR memory or the SMEM of other CCs.
-  Users have to declare and create segments, which correspond to whole or part of the local memory of cores located in other CCs.
-  Segments are managed by servers runs on IOC and CC.
-  Users initiate an asynchronous write or read between the local memory and a designated memory segment.
-  Users can use Two addresses are supplied, a local one and a remote relative to the memory segment.
-  \item \textbf{eMCOS message}: eMCOS provides message APIs for communication between threads by Tx interfaces through D-NoC.
-  the destination of a message is threads and sending/receiving behavior have asynchronous/synchronous modes.
-  Additionally, users can configure receiving behavior with mask and priority based filtering.
-  Under the message APIs, data can be exchanged between threads irrespective of which cluster the thread is running on.
-  eMCOS runs on IOC and CC so that threads and message are managed equally for all clusters.
-  Messages buffering on each core is managed by eMCOS and data sent by DMA through D-NoC is copied to the buffer in eMOCS.
-  After resolving the reception order, data is provided by non-cache access copy from the message buffer to user-space addresses.
-  \item \textbf{eMCOS session message}: eMCOS provides message APIs for large data communication by UC interfaces through D-NoC.
-  This API is designed to send large data rapidly by the UC.
-  Users have to open sessions which correspond to the pair of send and receive buffer.
-  The number of segments is limited by the number of UC on each cluster.
+  After the data is transferred, users must free the resources.
+  Although users must manage DMA resources, the library offers fine-grain control over interfaces, including transport routes on NoC components and send/receive buffers.
+  \item \textbf{mppa\_async}: The asynchronous communication API is used for asynchronous operations that involve on one-sided communications between the CC local memory banks and I/O cluster DDR memory. 
+  This API is designed to support applications that require remote memory access, whether the DDR memory or the SMEM of other CCs.
+  Users must create segments that correspond in whole or in part to the other CC's local memory banks.
+  These segments are managed by servers run on the IOC and CC.
+  Users initiate an asynchronous write or read process between the local memory and a designated memory segment.
+  Two addresses are supplied, one local and one remote from the memory segment.
+  \item \textbf{eMCOS message}: eMCOS provides message APIs for communication between threads via Tx interfaces in the D-NoC.
+  The destination of a message is a thread, and sending/receiving processes use asynchronous/synchronous modes.
+  Users can also configure receiving behavior with masks and priority-based filtering.
+  Under the message APIs, data can be exchanged between threads regardless of the cluster on which the thread is running.
+  eMCOS runs on IOC and CC to equally manage threads and messages between all clusters.
+  Message buffering on each core is managed by eMCOS, and the data sent by DMA through D-NoC are copied to the buffer in eMOCS.
+  After resolving the reception order, data are provided by copying non-cache access from the message buffer to user-space addresses.
+  \item \textbf{eMCOS session message}: eMCOS provides message APIs for large-data transfer using UC interfaces through D-NoC.
+  This API is designed to send large amounts of data rapidly via the UC.
+  Users must open sessions which correspond to pairs of send and receive buffers.
+  The number of segments is limited by the number of UCs on each cluster.
   Using sessions established in advance, users transport data between clusters.
-  The sending/receiving behavior have asynchronous/synchronous modes.
+  The sending/receiving behaviors use asynchronous/synchronous modes.
 \end{itemize}
 
 
 \chapter{Proposed Framework}
 \label{chap:proposed_framework}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \includegraphics[width=0.9\linewidth]{../figure/roslite/system_model.eps}
   \caption{\label{fig:rosl_system_model}
     Development flow of ROS-lite framework.}
 \end{figure*}
 
-The proposed framework, ROS-lite, is a structured communications layer for efficient development on many-core platforms.
-Although existing ROS has been being rapidly developed and widely used, the ROS does not support NoC communication on many-core platforms and embedded requirement such as RTOSs and limited memory on embedded platforms.
-ROS-lite is a solution for these challenges and provides a development environment in which ROS nodes run on each core on many-core platforms and communicate with each other.
-By enabling and extending numerous existing ROS applications, transporting and new development on embedded platforms are made much more efficient.
-For more information of ROS basic, please refer to Appendix A: Robot Operating System (ROS).
-Additionally, being based on existing ROS framework, ROS-lite has potential to communicate external ROS nodes on other platform.
-Design of ROS-lite can enhance efficient development on heterogeneous computing platforms.
-In this paper, we target eMCOS as an RTOS and MPPA-256 as an embedded many-core platform.
+The proposed framework, ROS-lite, is a structured communications layer that enables an efficient application development for many-core platforms.
+Although the existing ROS is well developed and widely used, it does not support NoC communication on many-core platforms as well as the required features for embedded platforms, such as RTOSs and limited memory.
+ROS-lite addresses these challenges and provides a development environment in which ROS nodes run on each core and communicate with each other.
+By adapting and extending numerous existing ROS applications, ROS-lite makes porting existing software and new development on embedded platforms much more efficient.
+For more information about ROS in general, refer to Appendix A.
+As it is based on the existing ROS framework, ROS-lite can communicate with external ROS nodes on another platform.
+The tests reported herein used eMCOS as an RTOS and MPPA-256 as an embedded many-core platform.
 
 \section{ROS-lite Toolchain}
 \label{sec:toolchain}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \tabcolsep = 0.5mm              % side-margin in column
   \begin{tabular}{cc}
-    \begin{minipage}[!htbp]{0.59\textwidth}
+    \begin{minipage}[thbp]{0.59\textwidth}
       \centering
       \includegraphics[width=0.85\linewidth]{../figure/roslite/example.eps}
       \caption{The publish/subscribe model in ROS-lite.}
       \label{fig:rosl_example}
     \end{minipage}
     &
-    \begin{minipage}[!htbp]{0.39\textwidth}
+    \begin{minipage}[thbp]{0.39\textwidth}
       \lstinputlisting{../code/roslite_map_two_listenres.map}
-      \caption{Map file Description ((\texttt{.msg})).}
+      \caption{Map file Description (\texttt{.map}).}
       \label{code:map_file}
     \end{minipage}
   \end{tabular}
 \end{figure*}
 
-This section describes a proposed framework called ROS-lite used to run ROS nodes on an embedded many-core platform.
-The development flow of ROS-lite is shown in Fig. \ref{fig:rosl_system_model}.
-ROS-lite can run application codes written as ROS nodes.
-We assume that application codes following ROS manner are written in C++.
-Application developers can extract source codes (application codes and message structure files) from existing ROS packages without change.
-For task mapping, developers edit an map file (\texttt{.map}) and assign ROS nodes to the clusters on many-core platforms.
-All developers have to do for modification of task mapping is editing map file.
-ROS nodes as processes on cores are described as a publish/subscribe model, following message structures defined in message files (\texttt{.msg}).
-ROS nodes can communicate with each other via either inner-cluster or inter-cluster communications.
-While these cores do communications via shared memory in inner-cluster, the cores do communications via NoC in inter-cluster.
+This section describes ROS-lite in detail.
+The development flow for ROS-lite is shown in Fig. \ref{fig:rosl_system_model}.
+ROS-lite can run application code written as ROS nodes.
+I assume that the applications are written in C++, similar to ROS.
+Application developers can adapt source code (application code and message structure files) from existing ROS packages without changing it.
+For task mapping, developers edit a map file (\texttt{.map}) and assign ROS nodes to the CCs on many-core platforms.
+Developers are required to only edit the map file to modify task mappings.
+The ROS nodes as processes on cores are described in terms of a publish/subscribe model, following the message structures defined in message files (\texttt{.msg}).
+ROS nodes can communicate with each other via either intra-cluster or inter-cluster routes.
+These cores handle intra-cluster communications via shared memory, whereas the inter-cluster are handled via NoC.
 
-The framework provides code generation and build system by command line interface for efficient development.
-First, in \textcircled{\scriptsize 1} of Fig. \ref{fig:rosl_system_model}, a template of a map file (\texttt{.map}) is generated from application source codes.
-The map file (\texttt{.map}) contains node names, the assigned cluster, information of topics published and subscribe to.
-Please check Fig. \ref{code:map_file} for an example of map file's specifications.
-These descriptions except for assigned cluster number is able to be interpreted from ROS nodes so that we provide code generation for template codes.
-Application developers can focus on the number of assigned cluster.
-Second, in \textcircled{\scriptsize 2} of Fig. \ref{fig:rosl_system_model}, header files defining message structure are generated from message files (\texttt{.msg}) as the original ROS does.
-Note that generated header file has been made lighter because the part required by ROS-lite is generated.
-This code generation part is based on an original ROS's script and message files (\texttt{.msg}) can be described in the same manner.
-Application developers do not have to modify message files (\texttt{.msg}) at all.
-Third, in \textcircled{\scriptsize 3} and \textcircled{\scriptsize 4} of Fig. \ref{fig:rosl_system_model}, initialization codes of launching processes of ROS nodes are generated from a map file (\texttt{.map}).
-ROS nodes are automatically launched as processes scheduled by the RTOS on user-assigned clusters on embedded platforms.
-Application developers do not have to write codes except for ROS nodes.
+ROS-lite toolchain provides a code generation and a build system with a command-line interface to allow an efficient development.
+First, as in \textcircled{\scriptsize 1} of Fig. \ref{fig:rosl_system_model}, a template of a map file (\texttt{.map}) is generated from application source code.
+The map file (\texttt{.map}) contains node names, the assigned cluster, and the information of topics that are published and subscribed to.
+Fig. \ref{code:map_file} can refer for an example of the map file specifications.
+These descriptions, except for the assigned cluster number, can be able to be interpreted from ROS nodes to provide code generation for template code.
+Application developers can then focus on the number of assigned clusters.
+Second, as in \textcircled{\scriptsize 2} of Fig. \ref{fig:rosl_system_model}, header files that defined the message structure are generated from message files (\texttt{.msg}), as in the original ROS.
+Note that the generated header files are lighter than when they are in ROS because only the part required by ROS-lite is generated.
+This code-generation module is based on the original ROS script, and message files (\texttt{.msg}) can be described as they are in in ROS.
+The message files (\texttt{.msg}) do not require any modifications.
+Third, in \textcircled{\scriptsize 3} and \textcircled{\scriptsize 4} of Fig. \ref{fig:rosl_system_model}, initialization code for launching processes of ROS nodes are generated from a map file (\texttt{.map}).
+ROS nodes are automatically launched as processes scheduled by the RTOS on user-assigned clusters.
+Application developers do not have to write code except for the ROS nodes that are used.
 Finally, in \textcircled{\scriptsize 5} of Fig. \ref{fig:rosl_system_model}, a build script is generated from the user-defined map file (\texttt{.map}).
-Source codes of ROS nodes are separately built in each user-assigned cluster because the executable files are loaded into separate memories for each cluster.
-This building process is conducted by generated build script.
-There is no need to modify build script each time developers change task mapping by modification of the map file (\texttt{.map}).
-All codes of ROS nodes are allocated in a same directory and are automatically built in each user-assigned cluster.
+The source code of the ROS nodes is built separately for each user-assigned cluster because the executable files are loaded into separate memory banks in each cluster.
+This process is conducted by build script.
+The build script does not require any modifications when the task mapping is changed by modifying the map file (\texttt{.map}).
+The code for the ROS nodes is allocated in a single directory, and each node is automatically built in each user-assigned cluster.
 
-We give a simple example for explanation of ROS-lite framework.
-One node publishes a \emph{chatter} topic and two nodes subscribe to the topic as shown in Fig. \ref{fig:rosl_example}.
-Messages in the \emph{chatter} topic are defined as string type named \emph{data}.
-The publisher node is launched in \emph{cluster 1} and two subscriber node in \emph{cluster 2}, as described in assigned cluster number in the map file (\texttt{.map}) of Fig. \ref{code:map_file}.
-Application developers can change node mapping by modification of the field of cluster number.
-Information of topics in map file (\texttt{.map}) is used for initialization of the relationship between the topics and the nodes so that ROS-lite conducts the process of matching the nodes to communicate by topic names.
-These field of the node name and topic information are generated from source codes of ROS nodes, and initialization codes of the node relationship for ROS-lite are generated from the map file (\texttt{.map}).
-Note that the field of the assigned cluster number has to be filled by application developers.
+A simple example to understand ROS-lite framework is provided herein.
+One node publishes a \emph{chatter} topic and two nodes subscribe to the topic, as shown in Fig. \ref{fig:rosl_example}.
+Messages in the \emph{chatter} topic are defined as a string type named \emph{data}.
+The publisher node is launched in \emph{cluster 1}, and two subscriber nodes are launched in \emph{cluster 2}, as described by the assigned cluster number in the map file (\texttt{.map}) shown in Fig. \ref{code:map_file}.
+Application developers can change the node mapping by modifying of the cluster number field.
+Information about topics in the map file (\texttt{.map}) is used to initialize the relation between the topics and the nodes so that ROS-lite directs the process of matching the nodes with topic names.
+These fields, for node name and topic information, are generated from source codes of the ROS nodes, and then initialization script for the node relations in ROS-lite are generated from the map file (\texttt{.map}).
+Note that the field for the assigned cluster numbers must be filled by application developers.
 
 \section{Design and Implementation}
 \label{sec:design_and_implementation}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\linewidth]{../figure/roslite/software_stack.eps}
+  \includegraphics[width=0.8\linewidth]{../figure/roslite/software_stack.eps}
   \caption{\label{fig:rosl_software_stack}
     System stack of ROS-lite on a many-core platform.}
 \end{figure}
 
-We have implemented ROS-lite on MPPA-256 as shown in Fig. \ref{fig:rosl_software_stack}.
-MPPA-256 is an example of NoC-based clustered many-core processors and distributed memory architecture.
-ROS-lite can run under limited memory with embedded requirements.
-The ROS-lite supports NoC-based message transfer with little memory consumption.
-Note that ROS-lite is a general architecture and other many-core processors can be adopted as well
+I tested ROS-lite with an implementation on MPPA-256 as shown in Fig. \ref{fig:rosl_software_stack}.
+MPPA-256 is an example of NoC-based clustered many-core processors with distributed memory architecture.
+ROS-lite can run on this platform, if memory is limited, as it would be in an embedded application.
+ROS-lite allows NoC-based message transfer with low memory consumption.
+Note that ROS-lite is a general framework, and other many-core processors can be used with it.
 
-In the implementation, eMCOS is used as the RTOS for ROS-lite because eMCOS has rich message functions described in Section \ref{sec:data_transfer_methods} and equally run on CCs and IOCs.
+In our test, eMCOS is used as the RTOS for ROS-lite because eMCOS has rich messaging functions, as described in Section \ref{sec:data_transfer_methods}, and can run well on CCs and IOCs.
 All threads under ROS-lite are managed by eMCOS.
-Generated light weight threads are not core-affinity threads.
-Threads are not allocated to a specific core within a cluster but are migrated within the specific cluster with the eMCOS scheduling policy.
-Internal thread management is improved by eMCOS.
+The light-weight threads so generated are not core-affinity threads.
+Threads are not allocated to a specific core within a cluster but are migrated within the specific cluster following the eMCOS scheduling policy.
+Internal thread management is thereby improved by eMCOS.
 
-ROS-lite does not have master server such as \texttt{ros master} in original ROS to avoid single failure point.
-This point is different from original ROS.
-Nodes in ROS-lite statically initialize topic information on which node outside own cluster subscribes to which topic by the map file description.
-Initialization codes are generated on off-line by command line interfaces.
-We adopted this off-line initialization since many specifications of execution time will be fixed before execution on many embedded systems.
-By excluding the master server, ROS-lite eliminates unnecessary communication between clusters and single failure point.
+ROS-lite does not have a master server like ROS’s \texttt{ros master}, which helps the original framework to avoid single failures. Nodes in ROS-lite use map files to statically initialize topic information that specifies each node that subscribes to each topic outside its own cluster.
+Initialization scripts are generated off-line by the command-line interfaces.
+I adopted this off-line initialization process since many specifications about execution time will be fixed ahead of time for most embedded systems.
+By eliminating the master server, ROS-lite avoids unnecessary communication between clusters and a single failure point.
 
-We give discussions for internal design of publish/subscribe transport for ROS-lite.
-Subscriber's main thread create \texttt{message receive function} for each topic as shown in Fig. \ref{fig:subscriber_design1}.
-Subscriber node realize messages buffering and behavior one process in ROS-lite.
-Design of Fig. \ref{fig:subscriber_design1} can be easily implemented with eMCOS message function.
-The messages function already implement message buffer and NoC transport between threads.
-However, the function's buffer is allocated in kernel-space and cannot be configured dynamically.
-To solve this problem, ROS-lite can use mppa\_async and session message.
-ROS-lite adopted mppa\_async because session message has constraint of session number by DMA resources.
-Session message is not suitable for this scenario that requires the creation of many sessions.
-Fig. \ref{fig:pubsub_thread_design1} shows implementation design of publish/subscribe transport for ROS-lite.
-Before data transport, the publisher nodes serizlize data following message structure.
-ROS-lite's serizlization policy is based on original ROS.
-After serizlization, the publisher node sends messages to subscriber node listed in topic information which is initialized by map file in off-line.
-Receiving serialized data size, the subscriber node allocates memory from heap memory and create segment for data transport.
-Frequent \texttt{alloc/free} of heap memory with each message size saves the limited memory of the embedded system.
-Segments of mppa\_async for transport between clusters is created and destoryed in each transport.
-Although this transaction got overhead, ROS-lite can flexibly deal with variable length messages such as vector.
+I next discuss the internal design of publish/subscribe transport for ROS-lite.
+A subscriber's main thread creates a \texttt{message receive function} for each topic, as shown in Fig. \ref{fig:subscriber_design1}.
+Subscriber nodes handle message buffering and behavior with one process in ROS-lite.
+The design in Fig. \ref{fig:subscriber_design1} can be implemented easily with the message function in eMCOS.
+The message function already implements message buffering and NoC transport between threads, but the buffer is allocated in kernel-space and cannot be configured dynamically.
+ROS-lite can use mppa\_async and session messaging to address this problem.
+ROS-lite adopts mppa\_async because the session message s constrained by the session number by DMA resources.
+Session messaging is not a suitable scenario that requires creating many sessions.
+Fig. \ref{fig:pubsub_thread_design1} shows the implementation design of publish/subscribe transport in ROS-lite.
+Before data transport, the publisher nodes serialize data following the message structure.
+ROS-lite's serialization policy is based on the original ROS.
+After serialization, the publisher node sends messages to the subscriber nodes listed in topic information, which are initialized by the map file off-line.
+Receiving the serialized data size, the subscriber node allocates memory and creates segments for data transport.
+Frequent \texttt{alloc} and \texttt{free} of heap memory for each message size conserve the limited memory of the embedded system.
+Segments of mppa\_async for transport between clusters are created and destroyed with each transport.
+Although this transaction increases overhead, it allows ROS-lite to flexibly handle variable-length messages, such as vectors.
 
-To prevent the simultaneous execution of callback functions and realize the design as one-node as one-process, it is necessary to use the design of Fig. \ref{fig:subscriber_design2} not Design of Fig. \ref{fig:subscriber_design1}.
-A callback queue manages the order of callback functions to be executed in the subscriber node.
-This queue can be simply implemented by eMCOS message buffering.
-eMCOS message is suitable for small data transport and data pushed for the queue is small because it contains just pointers to the callback function and received messages.
-Fig. \ref{fig:pubsub_thread_design2} shows the implementation design of Fig. \ref{fig:subscriber_design2}.
+To prevent the simultaneous execution of callback functions and design ensure that each node only runs as one process, it is necessary to use the design shown in Fig. \ref{fig:subscriber_design2}, not the design of Fig. \ref{fig:subscriber_design1}.
+A callback queue manages the order of callback functions to be executed at the subscriber node.
+This queue can be implemented simply with eMCOS message buffering.
+eMCOS messaging is suitable for small-size data transport, and the data pushed for the queue is small because it only contains pointers to the callback function and received messages.
+Fig. \ref{fig:pubsub_thread_design2} shows an example of ways in which the design in Fig. \ref{fig:subscriber_design2} can be implemented.
 
-ROS-lite supports original ROS source codes to enhance porting and development efficiency for many-core processors.
-ROS-lite provides the same interfaces to ROS API to application developers who do not familiar with NoC interfaces.
-Figs. \ref{code:talker}, \ref{code:listener}, and \ref{code:msg} are source codes for scenario in Fig. \ref{fig:rosl_example}.
+ROS-lite supports original ROS source code to enhance porting and development efficiency for applications running on many-core processors.
+ROS-lite provides the same interfaces as the ROS API for application developers who are not familiar with NoC interfaces.
+Figs. \ref{code:talker}, \ref{code:listener}, and \ref{code:msg} provide source code for the scenario in Fig. \ref{fig:rosl_example}.
 
 \clearpage
+\vspace{-10mm}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
-  \includegraphics[width=0.7\linewidth]{../figure/roslite/design/subscriber_design1.eps}
+  \includegraphics[width=0.9\linewidth]{../figure/roslite/design/subscriber_design1.eps}
+  \vspace{-10mm}
   \caption{\label{fig:subscriber_design1}
     Structure of subscriber node.}
+  \vspace{-10mm}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
-  \includegraphics[width=0.7\linewidth]{../figure/roslite/design/pubsub_thread_design1.eps}
+  \includegraphics[width=0.9\linewidth]{../figure/roslite/design/pubsub_thread_design1.eps}
   \caption{\label{fig:pubsub_thread_design1}
     Design of publish/subscribe sequence of Fig. \ref{fig:subscriber_design1} without message buffering.}
+    \vspace{-10mm}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\vspace{-10mm}
+
+\begin{figure*}[thbp]
   \centering
-  \includegraphics[width=0.7\linewidth]{../figure/roslite/design/subscriber_design2.eps}
+  \includegraphics[width=0.9\linewidth]{../figure/roslite/design/subscriber_design2.eps}
+  \vspace{-10mm}
   \caption{\label{fig:subscriber_design2}
     Structure of subscriber node with callback queue.}
+    \vspace{-10mm}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
-  \includegraphics[width=0.7\linewidth]{../figure/roslite/design/pubsub_thread_design2.eps}
+  \includegraphics[width=0.9\linewidth]{../figure/roslite/design/pubsub_thread_design2.eps}
   \caption{\label{fig:pubsub_thread_design2}
     Design of publish/subscribe sequence of Fig. \ref{fig:subscriber_design2}.}
+  \vspace{-10mm}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \lstinputlisting{../code/talker.cpp}
   \caption{\label{code:talker}
     An example of a C++ source code (\texttt{.cpp}): a publisher node.}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \lstinputlisting{../code/listener.cpp}
   \caption{\label{code:listener}
     An example of a C++ source code (\texttt{.cpp}): a subscribe node.}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \lstinputlisting{../code/String.msg}
   \caption{\label{code:msg}
@@ -563,8 +565,8 @@ Figs. \ref{code:talker}, \ref{code:listener}, and \ref{code:msg} are source code
 
 \chapter{Evaluations}
 \label{chap:evaluations}
-First, this section involves examining two types of evaluations: a D-NoC data transfer evaluation in which latency characteristics of interfaces and memory type are explored and a matrix calculation evaluation that demonstrates the parallelization potential of the MPPA-256 and its memory access characteristics.
-Subsequently, we conduct a practical self-driving application to examine the practicality of NUMA many cores.
+First, this chapter involves examining two types of evaluations: a D-NoC data transfer evaluation in which latency characteristics of interfaces and memory type are explored and a matrix calculation evaluation that demonstrates the parallelization potential of the MPPA-256 and its memory access characteristics.
+Subsequently, I conduct a practical self-driving application to examine the practicality of NUMA many cores.
 % Finally, we arrange lessons learned from above evaluations.
 The following evaluations are all conducted on real hardware boards with eMCOS.
 
@@ -574,7 +576,7 @@ The following evaluations are all conducted on real hardware boards with eMCOS.
 \subsection{Situations and Assumptions}
 \label{sec:situations_and_assumptions2}
 
-\begin{figure}[!htbp]
+\begin{figure}[thbp]
   \centering
   \includegraphics[width=0.5\linewidth]{../figure/noc_routes_old.eps}
       \caption{\label{fig:noc_routes}
@@ -592,7 +594,7 @@ The buffers are sequentially allocated in DDR or SRAM (IO SMEM or CC SMEM).
 The capacity of the CC SMEM is 2 MB, and thus it is assumed that the appropriate communication buffer size is 1 MB.
 Given this assumption, the other memory area corresponds to the application, libraries, and an operating system.
 End-to-end latencies are measured 1,000 times in numerous situations as shown in Figs. \ref{fig:DDR_tx}, \ref{fig:DDR_uc}, and \ref{fig:IO_SMEM_tx}, and boxplots are obtained, as depicted in Figs. \ref{fig:IO_SMEM_uc}, \ref{fig:tx_uc_log}, and \ref{fig:tx_uc}.
-In the evaluation setting, we minimize traffic conflicts to focus on the relation between end-to-end latency and routing on NoC.
+In the evaluation setting, I minimize traffic conflicts to focus on the relation between end-to-end latency and routing on NoC.
 
 \subsection{Influences of Routing and Memory Type}
 \label{sec:routing_and_memory}
@@ -627,18 +629,18 @@ In a manner similar to that of the Tx interface, the speed of the data transfer 
 
 % \clearpage
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \tabcolsep = 0.5mm              % side-margin in column
   \begin{tabular}{cc}
     % \setcounter{figure*}{9}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_DDR_tx.eps}
       \caption{Data transfer with Tx from IO DDR to CC.}
       \label{fig:DDR_tx}
     \end{minipage}
     &
     % \setcounter{figure*}{11}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_DDR_uc.eps}
       \caption{Data transfer with UC from IO DDR to CC.}
       \label{fig:DDR_uc}
@@ -646,18 +648,18 @@ In a manner similar to that of the Tx interface, the speed of the data transfer 
   \end{tabular}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \tabcolsep = 0.5mm              % side-margin in column
   \begin{tabular}{cc}
     % \setcounter{figure*}{9}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_IO_SMEM_uc.eps}
       \caption{Data transfer with UC from IO SMEM to CC.}
       \label{fig:IO_SMEM_tx}
     \end{minipage}
     &
     % \setcounter{figure*}{11}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_IO_SMEM_uc.eps}
       \caption{Data transfer with UC from IO SMEM to CC.}
       \label{fig:IO_SMEM_uc}
@@ -665,18 +667,18 @@ In a manner similar to that of the Tx interface, the speed of the data transfer 
   \end{tabular}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \tabcolsep = 0.5mm              % side-margin in column
   \begin{tabular}{cc}
     % \setcounter{figure*}{9}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_Tx_vs_UC_log.eps}
       \caption{Data transfer with Tx/UC (logarithmic axis).}
       \label{fig:tx_uc_log}
     \end{minipage}
     &
     % \setcounter{figure*}{11}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=1.0\linewidth]{../../R/mppa/graph/eps/BoxPlot_Tx_vs_UC.eps}
       \caption{Data transfer with Tx/UC (linear axis).}
       \label{fig:tx_uc}
@@ -721,7 +723,7 @@ There are several cases in which applications must access specific memory space 
 With respect to the given assumptions, the maximum total buffer size is 1 MB, and thus three matrix buffers are prepared, each of size 314 KB.
 Matrix A and Matrix B are multiplied, and the result is stored in Matrix C.
 The total for the three matrices is set as approximately 1 MB.
-We assume that the remainder of the SMEM (1 MB) is occupied with system software and applications in the CC.
+I assume that the remainder of the SMEM (1 MB) is occupied with system software and applications in the CC.
 
 \subsection{Influences of Cache and Memory Type}
 \label{sec:cache_and_memory}
@@ -745,14 +747,14 @@ As a result, the memory access speed without the cache exceeds that with it.
 
 \clearpage
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \includegraphics[width=.9\linewidth]{../figure/BarGraph_matrix_with_cache.eps}
   \caption{Matrix calculations in IOS and CC with cache.}
   \label{fig:mat_calc_cache}
 \end{figure*}
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \centering
   \includegraphics[width=.9\linewidth]{../figure/BarGraph_matrix_without_cache.eps}
   \caption{Matrix calculations in IOS and CC without cache.}
@@ -777,7 +779,7 @@ The overhead of data transfer and DMA memory access is small, and thus parallel 
 The impact of offloading increases when the matrix is large as shown in Fig. \ref{fig:mat_calc_offload_640}.
 Only a portion of the matrix is allocated in CCs, and thus it is possible to handle larger matrix buffers.
 
-Additionally, 640 KB matrices are prepared, and matrix calculation are evaluated with offload-computing.
+Additionally, 640 KB matrices are prepared, and matrix calculation is evaluated with offload-computing.
 The speed of the offloading result exceeds that of the IO DDR result with respect to the 314 KB matrices in Fig. \ref{fig:mat_calc_offload_314}.
 In these offloading evaluations, each CC concurrently transmits calculation results to the IOS.
 \comment{1-22}
@@ -787,17 +789,17 @@ Currently, to avoid this error, Matrix C must be allocated in the IO SMEM.
 Note that the above evaluation results when Matrix C is allocated in the DDR.
 
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \tabcolsep = 0.5mm              % side-margin in column
   \begin{tabular}{cc}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=0.9\linewidth]{../figure/BarGraph_matrix_with_CCs_314.eps}
       \caption{Matrix calculations with offload computing (314 KB matrix x 3).}
       \label{fig:mat_calc_offload_314}
     \end{minipage}   
     &
     % \setcounter{figure*}{11}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=0.9\linewidth]{../figure/BarGraph_matrix_with_CCs_640.eps}
       \caption{Matrix calculations with offload computing (640 KB matrix x 3).}
       \label{fig:mat_calc_offload_640}
@@ -808,7 +810,7 @@ Note that the above evaluation results when Matrix C is allocated in the DDR.
 \section{Practical Application}
 \label{sec:practical_application}
 This work adopts a portion of a self-driving system and this section demonstrates the parallelization potential of the MPPA-256.
-We selected an algorithm for vehicle self-localization written in C++ in Autoware, open-source software for urban self-driving \cite{autoware}, and a parallelized part of it.
+I selected an algorithm for vehicle self-localization written in C++ in Autoware, open-source software for urban self-driving \cite{autoware}, and a parallelized part of it.
 (Please refer to Appendix B: Autoware.)
 The self-localization adopts the normal-distribution transform matching algorithm \cite{magnusson2009three} implemented in the Point Cloud Library \cite{pcl}.
 A diagram depicting self-localization is shown in Fig. \ref{fig:ndt_matching_situation}.
@@ -832,10 +834,10 @@ This parallelized algorithm was executed on simulated and real car experiments i
 The steering, accelerator, and brake are automatically controlled based on the results of MPPA-256.
 A demonstration video of the adaptation of the parallelized self-localization algorithm to Autoware on eMCOS can be seen at: https://youtu.be/wZyqF90c5b8  
 
-\begin{figure*}[!htbp]
+\begin{figure*}[thbp]
   \tabcolsep = 0.5mm              % side-margin in column
   \begin{tabular}{cc}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \centering
       \includegraphics[width=1.0\linewidth]{../figure/ndt_matching.eps}
       \caption{\label{fig:ndt_matching_situation}
@@ -843,7 +845,7 @@ A demonstration video of the adaptation of the parallelized self-localization al
     \end{minipage}   
     &
     % \setcounter{figure*}{11}
-    \begin{minipage}[!htbp]{0.49\textwidth}
+    \begin{minipage}[thbp]{0.49\textwidth}
       \includegraphics[width=1.0\linewidth]{../figure/BarGraph_ndt_matching.eps}
       \caption{\label{fig:ndt_matching}
       Vehicle self-localization of the partially parallelized self-driving application.}
@@ -855,10 +857,10 @@ A demonstration video of the adaptation of the parallelized self-localization al
 \section{Lessons Learned}
 \label{sec:lessons}
 \comment{TBD: 3-4}
-Thus far, in Chapter \ref{chap:evaluations}, we have quantitatively clarified the characteristic of data transfer and parallel computing on NoC-based embedded many-core platforms.
-We can obtain insight and guidelines for users and developers of NoC-based embedded many-core platforms through MPPA-256.
+Thus far, in Chapter \ref{chap:evaluations}, I have quantitatively clarified the characteristic of data transfer and parallel computing on NoC-based embedded many-core platforms.
+I can obtain insight and guidelines for users and developers of NoC-based embedded many-core platforms through MPPA-256.
 
-From evaluations of D-NoC data transfer, we can learn two lessons: the influences of NoC routing and DMA.
+From evaluations of D-NoC data transfer, you can learn two lessons: the influences of NoC routing and DMA.
 First, data transfer latencies between clusters are hardly influenced by routing for users as shown in Figs. \ref{fig:DDR_tx}, \ref{fig:DDR_uc}, \ref{fig:IO_SMEM_tx}, and \ref{fig:IO_SMEM_uc}.
 Software transactions of transmitting and receiving in routers and RM are dominant factors for latencies.
 This is understandable owing to the minimized traffic conflicts of the evaluation setting.
@@ -866,25 +868,25 @@ However, when the influence of routing comes to intensive concurrent traffic ove
 Second, in the IOS, the latency of a UC is not significantly affected by the memory location, the DDR or SMEM, at which the transferred buffer is allocated from the evaluation of Fig. \ref{fig:tx_uc_log}.
 The merit of the UC is profitable for users because this is a common situation for transferring data from the DDR to the CC SMEM using the UC, especially for large amount of data.
 
-From microbenchmarks of matrix calculation, we can learn three lessons of memory access: characteristics of the SMEM, influences of a cache, and data flow control on D-NoC.
+From microbenchmarks of matrix calculation, you can learn three lessons of memory access: characteristics of the SMEM, influences of a cache, and data flow control on D-NoC.
 First, the memory access speed of the CC SMEM exceeds that of the IO SMEM as shown in Fig. \ref{fig:mat_calc_uncache}.
 There is a significant difference, which is a major reason to work actively in the CC.
-Second, we indicate quantitatively that the calculation speed without the cache in the CC SMEM in Fig. \ref{fig:mat_calc_uncache} exceeds that with the cache in Fig. \ref{fig:mat_calc_cache}.
+Second, I indicate quantitatively that the calculation speed without the cache in the CC SMEM in Fig. \ref{fig:mat_calc_uncache} exceeds that with the cache in Fig. \ref{fig:mat_calc_cache}.
 It is generally known that there is cache overhead when a miss hit occurs frequently, but it is notable that there is a substantial difference that cannot be ignored by the influences of a cache line.
 Third, when data are transferred in parallel from multiple CCs to the IO DDR, NoC routers' FIFO sometimes overflows owing to memory access delays of the DDR.
 This would ideally be expected to be prevented by the transmission protocol and flow control.
 
-From the practical application viewpoint, since we parallelize the vehicle self-localization algorithm of the self-driving system, NoC-based embedded many-core systems can be used practically in real environments.
-We applied for parallel data transfer from an IOS to CCs and parallel computing on the IOS and CCs by using the CC SMEM as scratch pad memory.    
-We also conducted demonstration experiments with real environments and confirmed the practicality of NoC-based embedded many-core systems.
+From the practical application viewpoint, since I parallelize the vehicle self-localization algorithm of the self-driving system, NoC-based embedded many-core systems can be used practically in real environments.
+I applied for parallel data transfer from an IOS to CCs and parallel computing on the IOS and CCs by using the CC SMEM as scratch pad memory.    
+I also conducted demonstration experiments with real environments and confirmed the practicality of NoC-based embedded many-core systems.
 
 \chapter{Related Work}
 \label{chap:related_work}
 \memo{Add comparison to eMCOS, Facrored OS, and Barrelfish}
 \memo{Add ROS-lite comparison table and descriptions}
-This section compares many-core platforms and discusses previous work related to multi-/many-core platforms.
+This chapter compares many-core platforms and discusses previous work related to multi-/many-core platforms.
 First, comparison of many-core platforms to other platforms is discussed.
-Second, the Kalray MPPA-256 which this work focuses on is compared to other COTS multi-/many-core components, and we summarize the features of MPPA-256.
+Second, the Kalray MPPA-256 which this work focuses on is compared to other COTS multi-/many-core components, and I summarize the features of MPPA-256.
 Finally, discussions of previous work and comparisons with them are described.
 
 % Recently, studies indicate that the single core processors are characterized by limited computation performance.
@@ -936,7 +938,7 @@ The total clock frequency per watt is the highest of the current COTS multi-/man
 The power consumption of the MPPA processor ranges between 16 W at 600 MHz and 24 W at 800 MHz.
 % While MPPA-256 and TILE64 \cite{bell2008tile64} target the embedded systems, other COTS components consider the HPC accelerator.
 % Their clock frequency per core exceeds that of embedded solutions.
-We must distinguish the COTS multi-/many-core components according to their requirements with reference to Table \ref{tb:comparison_manycore}.
+You must distinguish the COTS multi-/many-core components according to their requirements with reference to Table \ref{tb:comparison_manycore}.
 MPPA-256 is typically accepted with respect to many-core platforms and the model has been used in previous work \cite{becker2016contention}, \cite{carle2014static}, \cite{perret2016mapping}, \cite{perret2016predictable}.
 
 Previous work has examined real-time applications on many-core platforms, including MPPA-256.
@@ -959,7 +961,7 @@ Although the analysis examined the memory access characteristics of the external
 
 \begin{landscape}
   % \renewcommand{\arraystretch}{1.2}
-  \begin{table*}[!htbp]
+  \begin{table*}[thbp]
     \caption{\label{tb:comparison_platforms}
       Comparison of Many-core Platform to CPU, GPU, and FPGA}
     \centering
@@ -984,7 +986,7 @@ Although the analysis examined the memory access characteristics of the external
   \end{table*}
 
   % \renewcommand{\arraystretch}{1.2}
-  \begin{table*}[!htbp]
+  \begin{table*}[thbp]
     \caption{\label{tb:comparison_manycore}
       Comparison of Many-core Platforms}
     \centering
@@ -1004,7 +1006,7 @@ Although the analysis examined the memory access characteristics of the external
     \end{tabular}
   \end{table*}  
   % \renewcommand{\arraystretch}{1.2}
-  \begin{table*}[!htbp]
+  \begin{table*}[thbp]
     \caption{\label{tb:comparison_relatedwork}
       Comparison of Previous Work}
     \centering
@@ -1019,7 +1021,7 @@ Although the analysis examined the memory access characteristics of the external
       Kalray clusters calculate quickly \cite{kanter2015kalray} & L &  &  &  &  & \\
       Network-on-Chip Service Guarantees \cite{denet2017work} &  & \(\checkmark\) &  &  &  & \\
       Predictable composition of memory accesses \cite{perret2016predictable} &  & \(\checkmark\) & \(\checkmark\) &  &  & \\
-      this paper & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \\
+      this thesis & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \(\checkmark\) & \\
       \hline
     \end{tabular}
   \end{table*}
@@ -1031,15 +1033,15 @@ Although the analysis examined the memory access characteristics of the external
 % This paper has conducted quantitative evaluations that examined end-to-end latencies with embedded many-cores based on NoC, the scalability of parallelization, and the characteristics of the memory access speed.
 % From various experiments, we have evaluated the capabilities of the currently available data transfer methods and the parallelization potential for many-core computing based on NoC.
 % Our experimental results will allow system designers to choose appropriate system designs based on the requirements of their latency-sensitive many-core applications beyond an intuitive expectation.
-In this work, we conducted quantitative evaluations of data transfer methods on NoC technology, microbenchmarks with matrix calculation, and a practical application with NoC-based embedded many-core platforms such as MPPA-256.
-Additionally, we proposed software development framework called ROS-lite for the structured communications layer on NoC components efficient software development.
+This thesis conducted quantitative evaluations of data transfer methods on NoC technology, microbenchmarks with matrix calculation, and a practical application with NoC-based embedded many-core platforms such as MPPA-256.
+Additionally, I proposed software development framework called ROS-lite for the structured communications layer on NoC components efficient software development.
 Evaluations indicate latency characteristics on NoC platforms, influences of data allocation, and the scalability of parallelization.
 Our experimental results will allow system designers to select appropriate system designs.
 Parallelization of a real application proved the practicality of NoC-based embedded many-core platforms.
 Last, the ROS-lite runs with few memory consumption and realizes that ROS nodes run on each core on many-core platforms and communicate with each other.
 
-In future work, we will use benchmark applications such as that in \cite{che2010characterization} for further analysis.
-In addition, considering above the results, we will extend ROS-lite for real-time systems such as that in \cite{maruyama2016ros2}, and propose the parallelization of memory intensive algorithms, such as the nearest neighbor search in Section \ref{sec:practical_application}.
+In future work, I will use benchmark applications such as that in \cite{che2010characterization} for further analysis.
+In addition, considering above the results, I will extend ROS-lite for real-time systems such as that in \cite{maruyama2016ros2}, and propose the parallelization of memory intensive algorithms, such as the nearest neighbor search in Section \ref{sec:practical_application}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  テンプレート非依存部（終了）  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
